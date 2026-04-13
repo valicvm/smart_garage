@@ -7,43 +7,67 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap');
-
   *{margin:0;padding:0;box-sizing:border-box}
-
   :root{
-    --bg:#080a10;
-    --surface:#10131c;
-    --card:#161a28;
-    --border:#1e2336;
-    --text:#e4e8f1;
-    --dim:#636d88;
-    --accent:#635bff;
-    --accent2:#7c75ff;
-    --green:#2dd4a0;
-    --green-dim:#1a3d35;
-    --red:#f0544c;
-    --red-dim:#3d1a1a;
-    --amber:#fbbf24;
-    --amber-dim:#3d3010;
-    --blue:#38bdf8;
-    --blue-dim:#102a3d;
+    --bg:#080a10;--surface:#10131c;--card:#161a28;--border:#1e2336;
+    --text:#e4e8f1;--dim:#636d88;--accent:#635bff;--accent2:#7c75ff;
+    --green:#2dd4a0;--green-dim:#1a3d35;--red:#f0544c;--red-dim:#3d1a1a;
+    --amber:#fbbf24;--amber-dim:#3d3010;--blue:#38bdf8;--blue-dim:#102a3d;
     --r:14px;
   }
-
   body{
-    font-family:'DM Sans',system-ui,sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    min-height:100dvh;
-    padding:0 0 100px;
-    -webkit-font-smoothing:antialiased;
+    font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);
+    min-height:100dvh;-webkit-font-smoothing:antialiased;
   }
 
-  /* ─── Header ─── */
+  /* ═══ LOGIN SCREEN ═══ */
+  .login-screen{
+    min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px;
+  }
+  .login-box{
+    width:100%;max-width:360px;background:var(--card);border-radius:20px;
+    padding:36px 28px;border:1px solid var(--border);
+  }
+  .login-box h1{
+    font-size:1.5rem;font-weight:700;text-align:center;margin-bottom:4px;
+    background:linear-gradient(135deg,#635bff,#38bdf8);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .login-box .sub{text-align:center;color:var(--dim);font-size:.8rem;margin-bottom:28px}
+  .login-box .icon{text-align:center;font-size:2.5rem;margin-bottom:16px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:.75rem;color:var(--dim);margin-bottom:6px;
+    text-transform:uppercase;letter-spacing:1.5px;font-weight:600}
+  .field input{
+    width:100%;padding:12px 14px;background:var(--surface);border:1px solid var(--border);
+    border-radius:10px;color:var(--text);font-family:inherit;font-size:.9rem;
+    outline:none;transition:border-color .2s;
+  }
+  .field input:focus{border-color:var(--accent)}
+  .field input::placeholder{color:#3a4058}
+  .login-btn{
+    width:100%;padding:14px;border:none;border-radius:12px;
+    background:linear-gradient(135deg,#635bff,#4f46e5);color:#fff;
+    font-family:inherit;font-size:.95rem;font-weight:700;cursor:pointer;
+    margin-top:8px;transition:all .15s;letter-spacing:.3px;
+  }
+  .login-btn:active{transform:scale(.97)}
+  .login-btn:disabled{opacity:.5;cursor:wait}
+  .login-error{
+    margin-top:14px;padding:10px 14px;background:var(--red-dim);
+    border:1px solid #f0544c33;border-radius:10px;color:var(--red);
+    font-size:.8rem;text-align:center;display:none;
+  }
+  .login-error.show{display:block}
+  .login-footer{text-align:center;color:#1e2336;font-size:.6rem;margin-top:20px}
+
+  /* ═══ APP ═══ */
+  #app{display:none;padding:0 0 100px}
+
   .hdr{
     position:sticky;top:0;z-index:10;
     background:linear-gradient(180deg,var(--bg) 60%,transparent);
-    padding:20px 16px 28px;text-align:center;
+    padding:16px 16px 24px;text-align:center;
   }
   .hdr h1{
     font-size:1.35rem;font-weight:700;letter-spacing:-.5px;
@@ -51,8 +75,15 @@
     -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   }
   .hdr .sub{font-size:.72rem;color:var(--dim);margin-top:4px;letter-spacing:1px}
+  .user-bar{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px}
+  .user-email{font-size:.7rem;color:var(--dim)}
+  .logout-btn{
+    font-size:.65rem;padding:3px 10px;border-radius:20px;border:1px solid var(--border);
+    background:transparent;color:var(--red);cursor:pointer;font-family:inherit;font-weight:600;
+  }
+  .logout-btn:active{background:var(--red-dim)}
   .conn{display:inline-flex;align-items:center;gap:5px;
-    font-size:.68rem;padding:3px 10px;border-radius:20px;margin-top:8px;font-weight:600}
+    font-size:.68rem;padding:3px 10px;border-radius:20px;font-weight:600}
   .conn.ok{background:var(--green-dim);color:var(--green)}
   .conn.err{background:var(--red-dim);color:var(--red)}
   .conn .dot{width:6px;height:6px;border-radius:50%;background:currentColor}
@@ -61,54 +92,37 @@
 
   .wrap{padding:0 12px;max-width:480px;margin:0 auto}
 
-  /* ─── Alert boxes ─── */
-  .alert{
-    border-radius:var(--r);padding:12px 14px;margin-bottom:12px;
-    font-size:.82rem;font-weight:600;display:none;
-    border:1px solid;text-align:center;
-  }
+  .alert{border-radius:var(--r);padding:12px 14px;margin-bottom:12px;
+    font-size:.82rem;font-weight:600;display:none;border:1px solid;text-align:center}
   .alert.show{display:flex;align-items:center;justify-content:center;gap:8px}
   .alert-obstacle{background:var(--red-dim);border-color:#f0544c33;color:var(--red)}
   .alert-rain{background:var(--blue-dim);border-color:#38bdf833;color:var(--blue)}
   .alert-obstacle.show{animation:shake .5s}
   @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
 
-  /* ─── Cards ─── */
-  .card{
-    background:var(--card);border-radius:var(--r);padding:16px 18px;
-    margin-bottom:12px;border:1px solid var(--border);
-    transition:border-color .2s;
-  }
+  .card{background:var(--card);border-radius:var(--r);padding:16px 18px;
+    margin-bottom:12px;border:1px solid var(--border);transition:border-color .2s}
   .card:hover{border-color:#2a3050}
-  .card-label{
-    font-size:.62rem;text-transform:uppercase;letter-spacing:2.5px;
-    color:var(--dim);font-weight:600;margin-bottom:12px;
-  }
+  .card-label{font-size:.62rem;text-transform:uppercase;letter-spacing:2.5px;
+    color:var(--dim);font-weight:600;margin-bottom:12px}
 
-  /* ─── Door Hero ─── */
-  .door-hero{
-    text-align:center;padding:24px 18px 20px;
-    background:linear-gradient(135deg,var(--card),#1a1f30);
-  }
+  .door-hero{text-align:center;padding:24px 18px 20px;
+    background:linear-gradient(135deg,var(--card),#1a1f30)}
   .door-icon{font-size:3rem;margin-bottom:8px;transition:transform .4s}
   .door-icon.open{transform:rotate(-15deg) scale(1.1)}
   .door-state{font-size:1.5rem;font-weight:700;letter-spacing:-.5px}
-  .door-state.open{color:var(--green)}
-  .door-state.closed{color:var(--red)}
+  .door-state.open{color:var(--green)}.door-state.closed{color:var(--red)}
 
   .door-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
-  .dbtn{
-    border:none;border-radius:12px;padding:14px;font-family:inherit;
+  .dbtn{border:none;border-radius:12px;padding:14px;font-family:inherit;
     font-size:.88rem;font-weight:700;cursor:pointer;color:#fff;
     transition:all .12s;letter-spacing:.3px;
-    display:flex;align-items:center;justify-content:center;gap:6px;
-  }
+    display:flex;align-items:center;justify-content:center;gap:6px}
   .dbtn:active{transform:scale(.94)}
   .dbtn-open{background:linear-gradient(135deg,#2dd4a0,#1aaf82)}
   .dbtn-close{background:linear-gradient(135deg,#f0544c,#d43b34)}
   .dbtn:disabled{opacity:.3;cursor:not-allowed;transform:none}
 
-  /* ─── Sensor rows ─── */
   .srow{display:flex;justify-content:space-between;align-items:center;
     padding:9px 0;border-bottom:1px solid #ffffff06}
   .srow:last-child{border-bottom:none}
@@ -117,7 +131,6 @@
     align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
   .srow-v{font-weight:700;font-size:.85rem}
 
-  /* ─── Gauges ─── */
   .gauge{margin:6px 0}
   .gauge-row{display:flex;align-items:center;gap:8px;margin:5px 0}
   .gauge-lbl{font-size:.7rem;color:var(--dim);width:70px;text-align:right}
@@ -125,18 +138,13 @@
   .gauge-fill{height:100%;border-radius:2px;transition:width .6s ease,background .4s}
   .gauge-val{font-size:.68rem;color:var(--dim);width:45px;font-weight:600}
 
-  /* ─── Light control ─── */
   .light-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-  .lbtn{
-    border:none;border-radius:12px;padding:13px;font-family:inherit;
-    font-size:.86rem;font-weight:700;cursor:pointer;color:#fff;
-    transition:all .12s;
-  }
+  .lbtn{border:none;border-radius:12px;padding:13px;font-family:inherit;
+    font-size:.86rem;font-weight:700;cursor:pointer;color:#fff;transition:all .12s}
   .lbtn:active{transform:scale(.94)}
   .lbtn-on{background:linear-gradient(135deg,#fbbf24,#e0a00f)}
   .lbtn-off{background:linear-gradient(135deg,#3a4058,#2a3048)}
 
-  /* ─── Toggles ─── */
   .trow{display:flex;justify-content:space-between;align-items:center;padding:10px 0}
   .trow+.trow{border-top:1px solid #ffffff06}
   .trow-lbl{color:var(--dim);font-size:.82rem;display:flex;align-items:center;gap:8px}
@@ -148,60 +156,50 @@
   .sw input:checked+.sl{background:var(--accent)}
   .sw input:checked+.sl:before{transform:translateX(20px)}
 
-  /* ─── Event log ─── */
-  .evlog{
-    font-size:.78rem;padding:10px 14px;background:var(--surface);
-    border-radius:10px;border-left:3px solid var(--accent);margin-top:8px;color:var(--dim);
-  }
+  .evlog{font-size:.78rem;padding:10px 14px;background:var(--surface);
+    border-radius:10px;border-left:3px solid var(--accent);margin-top:8px;color:var(--dim)}
   .evlog .t{color:var(--accent);font-weight:700}
 
   .footer{text-align:center;color:#1e2336;font-size:.6rem;margin-top:24px;padding:16px}
-
-  /* ─── Firebase status screen ─── */
-  #setupScreen{
-    position:fixed;inset:0;z-index:100;background:var(--bg);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    gap:16px;padding:24px;
-  }
-  #setupScreen h2{font-size:1.2rem;background:linear-gradient(135deg,#635bff,#38bdf8);
-    -webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  #setupScreen p{color:var(--dim);font-size:.85rem;text-align:center;max-width:300px}
-  .spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);
-    border-radius:50%;animation:spin 1s linear infinite}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  #setupScreen.hidden{display:none}
 </style>
 </head>
 <body>
 
-<!-- Loading / Setup screen -->
-<div id="setupScreen">
-  <div class="spinner"></div>
-  <h2>Smart Garage</h2>
-  <p>Se conectează la Firebase...</p>
-  <p id="setupError" style="color:var(--red);display:none"></p>
+<!-- ═══ LOGIN ═══ -->
+<div id="loginScreen" class="login-screen">
+  <div class="login-box">
+    <div class="icon">🏠</div>
+    <h1>Smart Garage</h1>
+    <p class="sub">Introdu datele pentru a te conecta</p>
+    <div class="field">
+      <label>Email</label>
+      <input type="email" id="loginEmail" placeholder="email@exemplu.com" autocomplete="email">
+    </div>
+    <div class="field">
+      <label>Parolă</label>
+      <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <button class="login-btn" id="loginBtn" onclick="doLogin()">Conectare</button>
+    <div id="loginError" class="login-error"></div>
+    <p class="login-footer">Smart Garage v3.0 — ESP32 + Firebase</p>
+  </div>
 </div>
 
-<!-- Main App (hidden until Firebase connects) -->
-<div id="app" style="display:none">
-
+<!-- ═══ APP ═══ -->
+<div id="app">
 <div class="hdr">
   <h1>Smart Garage</h1>
   <div class="sub">ESP32 + FIREBASE REALTIME</div>
-  <div id="connStatus" class="conn ok"><span class="dot"></span> CONECTAT</div>
+  <div class="user-bar">
+    <span class="user-email" id="userEmail"></span>
+    <button class="logout-btn" onclick="doLogout()">Deconectare</button>
+  </div>
+  <div id="connStatus" class="conn ok" style="margin-top:8px"><span class="dot"></span> CONECTAT</div>
 </div>
-
 <div class="wrap">
+  <div id="alertObstacle" class="alert alert-obstacle">⚠ OBSTACOL DETECTAT — Ușa nu se poate închide!</div>
+  <div id="alertRain" class="alert alert-rain">🌧 PLOAIE DETECTATĂ — Garajul se închide automat!</div>
 
-  <!-- Alerts -->
-  <div id="alertObstacle" class="alert alert-obstacle">
-    ⚠ OBSTACOL DETECTAT — Ușa nu se poate închide!
-  </div>
-  <div id="alertRain" class="alert alert-rain">
-    🌧 PLOAIE DETECTATĂ — Garajul se închide automat!
-  </div>
-
-  <!-- Door Hero Card -->
   <div class="card door-hero">
     <div id="doorIcon" class="door-icon">🚪</div>
     <div id="doorState" class="door-state closed">ÎNCHISĂ</div>
@@ -211,59 +209,25 @@
     </div>
   </div>
 
-  <!-- Status -->
   <div class="card">
     <div class="card-label">Senzori</div>
-    <div class="srow">
-      <span class="srow-l"><span class="ico" style="background:var(--blue-dim);color:var(--blue)">📏</span> Distanță</span>
-      <span class="srow-v" id="vDist">— cm</span>
-    </div>
-    <div class="srow">
-      <span class="srow-l"><span class="ico" style="background:var(--amber-dim);color:var(--amber)">☀</span> Lumină ambientală</span>
-      <span class="srow-v" id="vLux">—</span>
-    </div>
-    <div class="srow">
-      <span class="srow-l"><span class="ico" style="background:var(--accent);color:#fff;opacity:.7">📡</span> Proximitate</span>
-      <span class="srow-v" id="vProx">—</span>
-    </div>
-    <div class="srow">
-      <span class="srow-l"><span class="ico" style="background:var(--blue-dim);color:var(--blue)">🌧</span> Ploaie</span>
-      <span class="srow-v" id="vRain">—</span>
-    </div>
-    <div class="srow">
-      <span class="srow-l"><span class="ico" style="background:var(--amber-dim);color:var(--amber)">💡</span> Lumină garaj</span>
-      <span class="srow-v" id="vLight">—</span>
-    </div>
+    <div class="srow"><span class="srow-l"><span class="ico" style="background:var(--blue-dim);color:var(--blue)">📏</span> Distanță</span><span class="srow-v" id="vDist">— cm</span></div>
+    <div class="srow"><span class="srow-l"><span class="ico" style="background:var(--amber-dim);color:var(--amber)">☀</span> Lumină ambientală</span><span class="srow-v" id="vLux">—</span></div>
+    <div class="srow"><span class="srow-l"><span class="ico" style="background:var(--accent);color:#fff;opacity:.7">📡</span> Proximitate</span><span class="srow-v" id="vProx">—</span></div>
+    <div class="srow"><span class="srow-l"><span class="ico" style="background:var(--blue-dim);color:var(--blue)">🌧</span> Ploaie</span><span class="srow-v" id="vRain">—</span></div>
+    <div class="srow"><span class="srow-l"><span class="ico" style="background:var(--amber-dim);color:var(--amber)">💡</span> Lumină garaj</span><span class="srow-v" id="vLight">—</span></div>
   </div>
 
-  <!-- Gauges -->
   <div class="card">
     <div class="card-label">Nivel senzori</div>
     <div class="gauge">
-      <div class="gauge-row">
-        <span class="gauge-lbl">Distanță</span>
-        <div class="gauge-track"><div id="gDist" class="gauge-fill" style="width:0%"></div></div>
-        <span class="gauge-val" id="gvDist">—</span>
-      </div>
-      <div class="gauge-row">
-        <span class="gauge-lbl">Lumină</span>
-        <div class="gauge-track"><div id="gLux" class="gauge-fill" style="width:0%"></div></div>
-        <span class="gauge-val" id="gvLux">—</span>
-      </div>
-      <div class="gauge-row">
-        <span class="gauge-lbl">Ploaie</span>
-        <div class="gauge-track"><div id="gRain" class="gauge-fill" style="width:0%"></div></div>
-        <span class="gauge-val" id="gvRain">—</span>
-      </div>
-      <div class="gauge-row">
-        <span class="gauge-lbl">Proximitate</span>
-        <div class="gauge-track"><div id="gProx" class="gauge-fill" style="width:0%"></div></div>
-        <span class="gauge-val" id="gvProx">—</span>
-      </div>
+      <div class="gauge-row"><span class="gauge-lbl">Distanță</span><div class="gauge-track"><div id="gDist" class="gauge-fill" style="width:0%"></div></div><span class="gauge-val" id="gvDist">—</span></div>
+      <div class="gauge-row"><span class="gauge-lbl">Lumină</span><div class="gauge-track"><div id="gLux" class="gauge-fill" style="width:0%"></div></div><span class="gauge-val" id="gvLux">—</span></div>
+      <div class="gauge-row"><span class="gauge-lbl">Ploaie</span><div class="gauge-track"><div id="gRain" class="gauge-fill" style="width:0%"></div></div><span class="gauge-val" id="gvRain">—</span></div>
+      <div class="gauge-row"><span class="gauge-lbl">Proximitate</span><div class="gauge-track"><div id="gProx" class="gauge-fill" style="width:0%"></div></div><span class="gauge-val" id="gvProx">—</span></div>
     </div>
   </div>
 
-  <!-- Light Control -->
   <div class="card">
     <div class="card-label">Control lumină</div>
     <div class="light-btns">
@@ -272,44 +236,26 @@
     </div>
   </div>
 
-  <!-- Automation toggles -->
   <div class="card">
     <div class="card-label">Automatizări</div>
-    <div class="trow">
-      <span class="trow-lbl">🌙 Lumină automată (întuneric)</span>
-      <label class="sw"><input type="checkbox" id="togAutoLight" checked onchange="setAuto('light_auto',this.checked)"><span class="sl"></span></label>
-    </div>
-    <div class="trow">
-      <span class="trow-lbl">🌧 Închide garaj la ploaie</span>
-      <label class="sw"><input type="checkbox" id="togAutoRain" checked onchange="setAuto('rain_auto',this.checked)"><span class="sl"></span></label>
-    </div>
+    <div class="trow"><span class="trow-lbl">🌙 Lumină automată (întuneric)</span><label class="sw"><input type="checkbox" id="togAutoLight" checked onchange="setAuto('light_auto',this.checked)"><span class="sl"></span></label></div>
+    <div class="trow"><span class="trow-lbl">🌧 Închide garaj la ploaie</span><label class="sw"><input type="checkbox" id="togAutoRain" checked onchange="setAuto('rain_auto',this.checked)"><span class="sl"></span></label></div>
   </div>
 
-  <!-- Event log -->
   <div class="card">
     <div class="card-label">Ultimul eveniment</div>
-    <div class="evlog">
-      <span class="t" id="evTime">00:00</span> — <span id="evMsg">Se conectează...</span>
-    </div>
+    <div class="evlog"><span class="t" id="evTime">00:00</span> — <span id="evMsg">Așteptare date...</span></div>
   </div>
-
-  <div class="footer">Smart Garage v3.0 — ESP32 + Firebase Realtime Database</div>
+  <div class="footer">Smart Garage v3.0 — ESP32 + Firebase</div>
 </div>
 </div>
 
-<!-- ═══════════════════════════════════════════ -->
-<!--  FIREBASE SDK + LOGIC                      -->
-<!-- ═══════════════════════════════════════════ -->
-
-<!-- Firebase v9 compat (CDN) -->
+<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 
 <script>
-// ═══════════════════════════════════════════════
-//  CONFIGURARE FIREBASE — MODIFICĂ AICI!
-// ═══════════════════════════════════════════════
 const firebaseConfig = {
   apiKey: "AIzaSyCYaN2NDY_ON5G7871oRwxClv-zGByIQ64",
   authDomain: "smartgarage-b90a4.firebaseapp.com",
@@ -321,154 +267,134 @@ const firebaseConfig = {
   measurementId: "G-F2E0DTBLTR"
 };
 
-// Email/parola pentru autentificare (aceeași din ESP32)
-const AUTH_EMAIL = "garage@test.com";
-const AUTH_PASS  = "parola123";
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+let db = null;
+let sensorRef = null;
 
-// ═══════════════════════════════════════════════
-//  INIȚIALIZARE
-// ═══════════════════════════════════════════════
+// ═══ LOGIN ═══
+async function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass  = document.getElementById('loginPass').value;
+  const btn   = document.getElementById('loginBtn');
+  const errEl = document.getElementById('loginError');
 
-let db;
+  if (!email || !pass) {
+    errEl.textContent = 'Completează email și parola.';
+    errEl.classList.add('show');
+    return;
+  }
 
-async function initFirebase() {
+  btn.disabled = true;
+  btn.textContent = 'Se conectează...';
+  errEl.classList.remove('show');
+
   try {
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-
-    // Autentificare
-    await auth.signInWithEmailAndPassword(AUTH_EMAIL, AUTH_PASS);
-    console.log("Firebase autentificat!");
-
-    db = firebase.database();
-
-    // Ascunde ecranul de loading
-    document.getElementById('setupScreen').classList.add('hidden');
-    document.getElementById('app').style.display = 'block';
-
-    // Ascultă datele senzorilor în timp real
-    listenSensors();
-
+    await auth.signInWithEmailAndPassword(email, pass);
   } catch (err) {
-    console.error("Firebase error:", err);
-    document.getElementById('setupError').style.display = 'block';
-    document.getElementById('setupError').textContent =
-      "Eroare: " + err.message + "\n\nVerifică configurarea Firebase!";
+    btn.disabled = false;
+    btn.textContent = 'Conectare';
+    errEl.classList.add('show');
+    const msgs = {
+      'auth/user-not-found': 'Utilizator inexistent.',
+      'auth/wrong-password': 'Parolă greșită.',
+      'auth/invalid-credential': 'Email sau parolă greșită.',
+      'auth/invalid-email': 'Format email invalid.',
+      'auth/too-many-requests': 'Prea multe încercări. Așteaptă.'
+    };
+    errEl.textContent = msgs[err.code] || ('Eroare: ' + err.message);
   }
 }
 
-// ═══════════════════════════════════════════════
-//  ASCULTARE DATE ÎN TIMP REAL
-// ═══════════════════════════════════════════════
+function doLogout() { auth.signOut(); }
 
+document.getElementById('loginPass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+document.getElementById('loginEmail').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('loginPass').focus(); });
+
+// ═══ AUTH STATE ═══
+auth.onAuthStateChanged(user => {
+  if (user) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('userEmail').textContent = user.email;
+    db = firebase.database();
+    listenSensors();
+  } else {
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('loginBtn').disabled = false;
+    document.getElementById('loginBtn').textContent = 'Conectare';
+    if (sensorRef) { sensorRef.off(); sensorRef = null; }
+    db = null;
+  }
+});
+
+// ═══ REALTIME ═══
 function listenSensors() {
-  const ref = db.ref('/garage/sensors');
+  if (!db) return;
+  if (sensorRef) sensorRef.off();
+  sensorRef = db.ref('/garage/sensors');
 
-  ref.on('value', (snap) => {
+  sensorRef.on('value', snap => {
     const d = snap.val();
     if (!d) return;
 
-    // Connection status
     const cs = document.getElementById('connStatus');
-    cs.className = 'conn ok';
-    cs.innerHTML = '<span class="dot"></span> LIVE';
+    cs.className='conn ok'; cs.innerHTML='<span class="dot"></span> LIVE';
 
-    // Door
-    const isOpen = d.door === 'open';
+    const isOpen = d.door==='open';
     const ds = document.getElementById('doorState');
-    ds.textContent = isOpen ? 'DESCHISĂ' : 'ÎNCHISĂ';
-    ds.className = 'door-state ' + (isOpen ? 'open' : 'closed');
-    document.getElementById('doorIcon').className = 'door-icon' + (isOpen ? ' open' : '');
+    ds.textContent = isOpen?'DESCHISĂ':'ÎNCHISĂ';
+    ds.className = 'door-state '+(isOpen?'open':'closed');
+    document.getElementById('doorIcon').className = 'door-icon'+(isOpen?' open':'');
 
-    // Light
-    document.getElementById('vLight').textContent = d.light ? 'ON' : 'OFF';
-    document.getElementById('vLight').style.color = d.light ? 'var(--amber)' : 'var(--dim)';
+    document.getElementById('vLight').textContent = d.light?'ON':'OFF';
+    document.getElementById('vLight').style.color = d.light?'var(--amber)':'var(--dim)';
 
-    // Rain
     const rs = document.getElementById('vRain');
-    rs.textContent = d.raining ? 'PLOUĂ' : 'USCAT';
-    rs.style.color = d.raining ? 'var(--blue)' : 'var(--green)';
+    rs.textContent = d.raining?'PLOUĂ':'USCAT';
+    rs.style.color = d.raining?'var(--blue)':'var(--green)';
 
-    // Distance
-    document.getElementById('vDist').textContent = d.distance.toFixed(1) + ' cm';
-    document.getElementById('vDist').style.color = d.distance < 15 ? 'var(--red)' : 'var(--text)';
+    document.getElementById('vDist').textContent = d.distance.toFixed(1)+' cm';
+    document.getElementById('vDist').style.color = d.distance<15?'var(--red)':'var(--text)';
+    document.getElementById('vLux').textContent = d.ambient_light+(d.ambient_light<50?' (întuneric)':'');
+    document.getElementById('vProx').textContent = d.proximity+(d.proximity>200?' (aproape)':'');
 
-    // Ambient light
-    document.getElementById('vLux').textContent = d.ambient_light + (d.ambient_light < 50 ? ' (întuneric)' : '');
+    setG('Dist',Math.min(d.distance/200*100,100),d.distance.toFixed(0)+'cm',d.distance<15?'var(--red)':d.distance<40?'var(--amber)':'var(--green)');
+    setG('Lux',Math.min(d.ambient_light/1000*100,100),d.ambient_light,d.ambient_light<50?'var(--accent)':'var(--amber)');
+    setG('Rain',(4095-d.rain_analog)/4095*100,d.rain_analog,d.raining?'var(--blue)':'var(--green)');
+    setG('Prox',Math.min(d.proximity/1023*100,100),d.proximity,d.proximity>200?'var(--red)':'var(--green)');
 
-    // Proximity
-    document.getElementById('vProx').textContent = d.proximity + (d.proximity > 200 ? ' (aproape)' : '');
-
-    // ─── Gauges ───
-    setG('Dist', Math.min(d.distance/200*100,100), d.distance.toFixed(0)+'cm',
-      d.distance<15?'var(--red)':d.distance<40?'var(--amber)':'var(--green)');
-    setG('Lux', Math.min(d.ambient_light/1000*100,100), d.ambient_light,
-      d.ambient_light<50?'var(--accent)':'var(--amber)');
-    setG('Rain', (4095-d.rain_analog)/4095*100, d.rain_analog,
-      d.raining?'var(--blue)':'var(--green)');
-    setG('Prox', Math.min(d.proximity/1023*100,100), d.proximity,
-      d.proximity>200?'var(--red)':'var(--green)');
-
-    // ─── Alerts ───
-    document.getElementById('alertObstacle').className =
-      'alert alert-obstacle' + (d.obstacle ? ' show' : '');
-    document.getElementById('alertRain').className =
-      'alert alert-rain' + (d.raining && d.door==='open' ? ' show' : '');
+    document.getElementById('alertObstacle').className='alert alert-obstacle'+(d.obstacle?' show':'');
+    document.getElementById('alertRain').className='alert alert-rain'+(d.raining&&d.door==='open'?' show':'');
     document.getElementById('btnClose').disabled = d.obstacle;
 
-    // ─── Toggles ───
     document.getElementById('togAutoLight').checked = d.light_auto;
     document.getElementById('togAutoRain').checked = d.rain_auto;
 
-    // ─── Event ───
-    document.getElementById('evMsg').textContent = d.last_event || '—';
-    if (d.timestamp) {
-      const now = Math.floor(Date.now()/1000);
-      const age = Math.max(0, now - d.timestamp);
-      const m = Math.floor(age/60), s = age%60;
-      document.getElementById('evTime').textContent =
-        (m<10?'0':'')+m+':'+(s<10?'0':'')+s+' ago';
+    document.getElementById('evMsg').textContent = d.last_event||'—';
+    if(d.timestamp){
+      const age=Math.max(0,Math.floor(Date.now()/1000)-d.timestamp);
+      const m=Math.floor(age/60),s=age%60;
+      document.getElementById('evTime').textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s+' ago';
     }
   });
 
-  // Detectare deconectare
-  db.ref('.info/connected').on('value', (snap) => {
-    const cs = document.getElementById('connStatus');
-    if (snap.val()) {
-      cs.className = 'conn ok';
-      cs.innerHTML = '<span class="dot"></span> LIVE';
-    } else {
-      cs.className = 'conn err';
-      cs.innerHTML = '<span class="dot"></span> OFFLINE';
-    }
+  db.ref('.info/connected').on('value', snap => {
+    const cs=document.getElementById('connStatus');
+    if(snap.val()){cs.className='conn ok';cs.innerHTML='<span class="dot"></span> LIVE';}
+    else{cs.className='conn err';cs.innerHTML='<span class="dot"></span> OFFLINE';}
   });
 }
 
-// ═══════════════════════════════════════════════
-//  TRIMITERE COMENZI
-// ═══════════════════════════════════════════════
-
-function sendCmd(key, val) {
-  if (!db) return;
-  db.ref('/garage/commands/' + key).set(val);
+function sendCmd(k,v){if(db)db.ref('/garage/commands/'+k).set(v);}
+function setAuto(k,v){if(db)db.ref('/garage/commands/'+k).set(v);}
+function setG(id,pct,txt,col){
+  document.getElementById('g'+id).style.width=pct+'%';
+  document.getElementById('g'+id).style.background=col;
+  document.getElementById('gv'+id).textContent=txt;
 }
-
-function setAuto(key, val) {
-  if (!db) return;
-  db.ref('/garage/commands/' + key).set(val);
-}
-
-function setG(id, pct, txt, col) {
-  const bar = document.getElementById('g'+id);
-  bar.style.width = pct+'%';
-  bar.style.background = col;
-  document.getElementById('gv'+id).textContent = txt;
-}
-
-// ═══════════════════════════════════════════════
-//  START
-// ═══════════════════════════════════════════════
-initFirebase();
 </script>
 </body>
 </html>
+
