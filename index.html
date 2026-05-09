@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Smart Garage v5</title>
+<title>Smart Garage </title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:Arial,sans-serif;background:#111;color:#ddd;min-height:100dvh}
@@ -23,8 +23,7 @@ body{font-family:Arial,sans-serif;background:#111;color:#ddd;min-height:100dvh}
 .lft{text-align:center;color:#333;font-size:.6rem;margin-top:14px}
 #app{display:none}
 .hdr{background:rgba(18,18,30,.92);border-bottom:2px solid #3a6dd4;padding:10px 14px;text-align:center}
-.hdr h1{color:#5b9aff;font-size:1.1rem}
-.hdr .sub{color:#777;font-size:.7rem;margin-top:2px}
+.hdr h1{color:#5b9aff;font-size:1.1rem}.hdr .sub{color:#777;font-size:.7rem;margin-top:2px}
 .ubar{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:5px}
 .ubar span{font-size:.7rem;color:#999}
 .ubtn{font-size:.65rem;padding:2px 8px;border-radius:3px;border:1px solid #555;background:none;color:#f55;cursor:pointer}
@@ -33,17 +32,13 @@ body{font-family:Arial,sans-serif;background:#111;color:#ddd;min-height:100dvh}
 .badge.er{background:#3a1515;color:#f55;border:1px solid #933}
 .ct{padding:10px;max-width:460px;margin:0 auto}
 .alr{padding:8px;border-radius:5px;margin-bottom:8px;font-size:.8rem;font-weight:bold;text-align:center;display:none}
-.alr.show{display:block}
-.alr-r{background:#3a1515;border:1px solid #933;color:#f55}
-.alr-y{background:#3a3010;border:1px solid #a80;color:#fb3}
+.alr.show{display:block}.alr-r{background:#3a1515;border:1px solid #933;color:#f55}.alr-y{background:#3a3010;border:1px solid #a80;color:#fb3}
 .sec{background:rgba(22,22,35,.9);border:1px solid #333;border-radius:6px;padding:12px 14px;margin-bottom:10px}
 .sec-t{font-size:.72rem;color:#5b9aff;font-weight:bold;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid #2a2a3a}
-.door-d{text-align:center;padding:6px 0}
-.door-d .di{font-size:1.8rem}
-.door-d .dt{font-size:1.1rem;font-weight:bold;margin-top:3px}
+.door-d{text-align:center;padding:6px 0}.door-d .di{font-size:1.8rem}.door-d .dt{font-size:1.1rem;font-weight:bold;margin-top:3px}
 .dt.open{color:#4a4}.dt.closed{color:#f55}
 .brow{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
-.b{padding:10px;border:none;border-radius:5px;font-size:.82rem;font-weight:bold;cursor:pointer;color:#fff;transition:opacity .2s}
+.b{padding:10px;border:none;border-radius:5px;font-size:.82rem;font-weight:bold;cursor:pointer;color:#fff;transition:opacity .15s}
 .b:active{opacity:.8}.b:disabled{opacity:.25;cursor:not-allowed}
 .bg_{background:#2a7a2a}.br{background:#b22}.ba{background:#d90}.bx{background:#555}
 .stb{width:100%;border-collapse:collapse}
@@ -53,18 +48,17 @@ body{font-family:Arial,sans-serif;background:#111;color:#ddd;min-height:100dvh}
 .bar{display:flex;align-items:center;gap:6px;margin:4px 0}
 .bar-l{font-size:.7rem;color:#999;width:70px;text-align:right}
 .bar-t{flex:1;height:7px;background:#1a1a2a;border-radius:3px;overflow:hidden;border:1px solid #333}
-.bar-f{height:100%;border-radius:3px;transition:width .4s}
-.bar-v{font-size:.68rem;color:#999;width:42px;font-weight:bold}
-.crow{display:flex;align-items:center;gap:8px;margin:7px 0}
+.bar-f{height:100%;border-radius:3px;transition:width .4s}.bar-v{font-size:.68rem;color:#999;width:42px;font-weight:bold}
+.crow{display:flex;align-items:center;gap:8px;margin:7px 0;flex-wrap:wrap}
 .crow label{font-size:.78rem;color:#999;min-width:70px}
-.crow input[type=range]{flex:1;accent-color:#3a6dd4}
+.crow input[type=range]{flex:1;accent-color:#3a6dd4;min-width:100px}
 .crow input[type=number]{width:50px;padding:5px;background:#1a1a28;border:1px solid #444;border-radius:3px;color:#ddd;font-size:.8rem;text-align:center}
 .crow input[type=time]{padding:5px 8px;background:#1a1a28;border:1px solid #444;border-radius:3px;color:#ddd;font-size:.82rem}
-.crow input[type=time]:focus{border-color:#5b9aff;outline:none}
 .crow .vl{font-size:.8rem;color:#5b9aff;font-weight:bold;min-width:30px;text-align:right}
 .tw{display:flex;justify-content:space-between;align-items:center;padding:6px 0}
 .tw+.tw{border-top:1px solid #252535}
 .tw span{font-size:.78rem;color:#bbb}
+.tw .hint{font-size:.62rem;color:#666;display:block}
 .tg{position:relative;width:36px;height:18px;flex-shrink:0}
 .tg input{opacity:0;width:0;height:0;position:absolute}
 .tg .tk{position:absolute;inset:0;background:#333;border-radius:9px;cursor:pointer;transition:.2s;border:1px solid #555}
@@ -78,93 +72,94 @@ body{font-family:Arial,sans-serif;background:#111;color:#ddd;min-height:100dvh}
 .ev .et{color:#5b9aff;font-weight:bold}
 .sinfo{font-size:.72rem;color:#5b9aff;margin-top:6px;padding:5px 8px;background:#0a0a1a;border-radius:3px}
 .mby{text-align:center;color:#444;font-size:.68rem;margin-top:16px;padding-bottom:20px;font-style:italic}
+.colors{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.cbtn{width:32px;height:32px;border-radius:50%;border:2px solid #444;cursor:pointer;transition:border .15s}
+.cbtn:hover{border-color:#fff}.cbtn.active{border-color:#5b9aff;border-width:3px}
 </style>
 </head>
 <body>
 <div class="bg"></div>
 <div class="page">
-
 <div id="loginScreen" class="login">
 <div class="lbox">
-  <h2>Smart Garage</h2>
-  <p class="sub">ESP32 + Firebase — Autentificare</p>
+  <h2>Smart Garage</h2><p class="sub">ESP32 + Firebase v6.0</p>
   <label>Email</label><input type="email" id="le" placeholder="email@exemplu.com">
   <label>Parola</label><input type="password" id="lp" placeholder="parola">
   <button class="lbtn" id="lb" onclick="doLogin()">Conectare</button>
-  <div id="lerr" class="lerr"></div>
-  <p class="lft">Made by Valentin</p>
-</div>
-</div>
+  <div id="lerr" class="lerr"></div><p class="lft">Made by Valentin</p>
+</div></div>
 
 <div id="app">
 <div class="hdr">
-  <h1>Smart Garage v5.0</h1>
-  <div class="sub">ESP32 + APDS-9930 + AHT10 + 2xServo + Firebase</div>
+  <h1>Smart Garage v6.0</h1><div class="sub">ESP32 + APDS-9930 + AHT10 + WS2812</div>
   <div class="ubar"><span id="ue"></span><button class="ubtn" onclick="doLogout()">Logout</button></div>
   <div id="cb" class="badge ok">LIVE</div>
 </div>
 <div class="ct">
-  <div id="aObs" class="alr alr-r">!! OBSTACOL detectat — usa blocata !!</div>
-  <div id="aHum" class="alr alr-y">!! Umiditate ridicata (peste 50%) !!</div>
+  <div id="aObs" class="alr alr-r">!! OBSTACOL — usa blocata !!</div>
+  <div id="aHum" class="alr alr-y">!! Umiditate peste 50% !!</div>
 
-  <div class="sec">
-    <div class="sec-t">Usa garaj (2 servomotoare)</div>
+  <div class="sec"><div class="sec-t">Usa garaj (2 servo tandem)</div>
     <div class="door-d"><div class="di">🚪</div><div id="ds" class="dt closed">INCHISA</div></div>
-    <div class="brow">
-      <button class="b bg_" id="bOpen" onclick="cmdSafe('door_cmd','open')">OPEN</button>
-      <button class="b br" id="bClose" onclick="cmdSafe('door_cmd','close')">CLOSE</button>
-    </div>
+    <div class="brow"><button class="b bg_" id="bOpen" onclick="cmdS('door_cmd','open')">OPEN</button><button class="b br" id="bClose" onclick="cmdS('door_cmd','close')">CLOSE</button></div>
   </div>
 
-  <div class="sec">
-    <div class="sec-t">Senzori</div>
+  <div class="sec"><div class="sec-t">Senzori</div>
     <table class="stb">
-      <tr><td>Temperatura (AHT10)</td><td id="vT">-- °C</td></tr>
-      <tr><td>Umiditate (AHT10)</td><td id="vH">-- %</td></tr>
-      <tr><td>Distanta HC-SR04</td><td id="vD">-- cm</td></tr>
-      <tr><td>Lumina (APDS-9930)</td><td id="vL">--</td></tr>
-      <tr><td>Proximitate (APDS)</td><td id="vP">--</td></tr>
+      <tr><td>Temperatura</td><td id="vT">--</td></tr>
+      <tr><td>Umiditate</td><td id="vH">--</td></tr>
+      <tr><td>Distanta HC-SR04</td><td id="vD">--</td></tr>
+      <tr><td>Lumina APDS</td><td id="vL">--</td></tr>
+      <tr><td>Proximitate APDS</td><td id="vP">--</td></tr>
       <tr><td>Obstacol</td><td id="vO">--</td></tr>
-      <tr><td>LED garaj</td><td id="vLed">--</td></tr>
+      <tr><td>Ring LED</td><td id="vLed">--</td></tr>
     </table>
   </div>
 
-  <div class="sec">
-    <div class="sec-t">Nivel senzori</div>
+  <div class="sec"><div class="sec-t">Nivel senzori</div>
     <div class="bar"><span class="bar-l">Distanta</span><div class="bar-t"><div id="gD" class="bar-f" style="width:0%"></div></div><span class="bar-v" id="gvD">--</span></div>
     <div class="bar"><span class="bar-l">Lumina</span><div class="bar-t"><div id="gL" class="bar-f" style="width:0%"></div></div><span class="bar-v" id="gvL">--</span></div>
     <div class="bar"><span class="bar-l">Temp</span><div class="bar-t"><div id="gT" class="bar-f" style="width:0%"></div></div><span class="bar-v" id="gvT">--</span></div>
     <div class="bar"><span class="bar-l">Umiditate</span><div class="bar-t"><div id="gH" class="bar-f" style="width:0%"></div></div><span class="bar-v" id="gvH">--</span></div>
   </div>
 
-  <div class="sec">
-    <div class="sec-t">Control lumina</div>
+  <div class="sec"><div class="sec-t">Ring LED WS2812 (12 LED RGB)</div>
     <div class="brow">
-      <button class="b ba" onclick="cmdSafe('light_cmd','on')">ON</button>
-      <button class="b bx" onclick="cmdSafe('light_cmd','off')">OFF</button>
+      <button class="b ba" onclick="cmdS('light_cmd','on')">ON</button>
+      <button class="b bx" onclick="cmdS('light_cmd','off')">OFF</button>
     </div>
+    <p style="font-size:.65rem;color:#666;margin-top:4px">OFF dezactiveaza si lumina automata. Reactivezi de mai jos.</p>
     <div class="crow" style="margin-top:10px">
       <label>Intensitate:</label>
-      <input type="range" id="sBr" min="0" max="255" value="255" step="5" oninput="document.getElementById('vBr').textContent=this.value" onchange="debounceBr()">
+      <input type="range" id="sBr" min="0" max="255" value="255" step="5" oninput="document.getElementById('vBr').textContent=this.value" onchange="dbBr()">
       <span class="vl" id="vBr">255</span>
     </div>
-    <div class="crow">
+    <p style="font-size:.72rem;color:#999;margin:6px 0 2px">Culoare:</p>
+    <div class="colors">
+      <div class="cbtn" style="background:#fff" onclick="setColor(255,255,255,this)" title="Alb"></div>
+      <div class="cbtn" style="background:#f44" onclick="setColor(255,68,68,this)" title="Rosu"></div>
+      <div class="cbtn" style="background:#4f4" onclick="setColor(68,255,68,this)" title="Verde"></div>
+      <div class="cbtn" style="background:#44f" onclick="setColor(68,68,255,this)" title="Albastru"></div>
+      <div class="cbtn" style="background:#ff0" onclick="setColor(255,255,0,this)" title="Galben"></div>
+      <div class="cbtn" style="background:#f0f" onclick="setColor(255,0,255,this)" title="Mov"></div>
+      <div class="cbtn" style="background:#0ff" onclick="setColor(0,255,255,this)" title="Cyan"></div>
+      <div class="cbtn" style="background:#f90" onclick="setColor(255,153,0,this)" title="Portocaliu"></div>
+      <div class="cbtn" style="background:#f69" onclick="setColor(255,102,153,this)" title="Roz"></div>
+    </div>
+    <div style="font-size:.72rem;color:#777;margin-top:4px">Culoare activa: <span id="colorTxt" style="font-weight:bold;color:#5b9aff">#ffffff</span></div>
+    <div class="crow" style="margin-top:8px">
       <label>Prag lumina:</label>
       <input type="number" id="iTh" min="1" max="4000" value="50" style="width:60px">
-      <button class="b bx" style="padding:5px 10px;font-size:.75rem" onclick="cmdSafe('light_threshold',parseInt(document.getElementById('iTh').value))">Seteaza</button>
+      <button class="b bx" style="padding:5px 10px;font-size:.75rem" onclick="cmdS('light_threshold',parseInt(document.getElementById('iTh').value))">Set</button>
     </div>
   </div>
 
-  <div class="sec">
-    <div class="sec-t">Programare lumina</div>
-    <p style="font-size:.72rem;color:#777;margin-bottom:6px">Alege zilele si ora exacta (HH:MM):</p>
+  <div class="sec"><div class="sec-t">Programare lumina</div>
+    <p style="font-size:.72rem;color:#777;margin-bottom:6px">Alege zilele si ora (HH:MM):</p>
     <div class="days" id="dayChecks">
-      <label><input type="checkbox" value="0"> Lu</label>
-      <label><input type="checkbox" value="1"> Ma</label>
-      <label><input type="checkbox" value="2"> Mi</label>
-      <label><input type="checkbox" value="3"> Jo</label>
-      <label><input type="checkbox" value="4"> Vi</label>
-      <label><input type="checkbox" value="5"> Sa</label>
+      <label><input type="checkbox" value="0"> Lu</label><label><input type="checkbox" value="1"> Ma</label>
+      <label><input type="checkbox" value="2"> Mi</label><label><input type="checkbox" value="3"> Jo</label>
+      <label><input type="checkbox" value="4"> Vi</label><label><input type="checkbox" value="5"> Sa</label>
       <label><input type="checkbox" value="6"> Du</label>
     </div>
     <div class="crow"><label>De la:</label><input type="time" id="schS" value=""></div>
@@ -174,19 +169,16 @@ body{font-family:Arial,sans-serif;background:#111;color:#ddd;min-height:100dvh}
     <div class="sinfo" id="sInfo">Niciun program setat</div>
   </div>
 
-  <div class="sec">
-    <div class="sec-t">Automatizari</div>
-    <div class="tw"><span>Lumina automata pe intuneric</span><label class="tg"><input type="checkbox" id="tAL" checked onchange="setV('light_auto',this.checked)"><span class="tk"></span></label></div>
+  <div class="sec"><div class="sec-t">Setari senzori</div>
+    <div class="tw"><span>Lumina automata pe intuneric<span class="hint">(aprinde ring cand e intuneric, doar cu lumina OFF)</span></span><label class="tg"><input type="checkbox" id="tAL" onchange="togCmd('light_auto',this.checked)"><span class="tk"></span></label></div>
+    <div class="tw"><span>Detectie obstacol HC-SR04<span class="hint">(ON = senzor activ, OFF = oprit complet)</span></span><label class="tg"><input type="checkbox" id="tObs" onchange="togCmd('obstacle_enabled',this.checked)"><span class="tk"></span></label></div>
   </div>
 
-  <div class="sec">
-    <div class="sec-t">Ultimul eveniment</div>
+  <div class="sec"><div class="sec-t">Ultimul eveniment</div>
     <div class="ev"><span class="et" id="evT">00:00</span> — <span id="evM">Asteptare...</span></div>
   </div>
-  <p class="mby">Made by Valentin — Smart Garage v5.0</p>
-</div>
-</div>
-</div>
+  <p class="mby">Made by Valentin — Smart Garage v6.0</p>
+</div></div></div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
@@ -194,36 +186,24 @@ body{font-family:Arial,sans-serif;background:#111;color:#ddd;min-height:100dvh}
 <script>
 var cfg={apiKey:"AIzaSyCYaN2NDY_ON5G7871oRwxClv-zGByIQ64",authDomain:"smartgarage-b90a4.firebaseapp.com",databaseURL:"https://smartgarage-b90a4-default-rtdb.europe-west1.firebasedatabase.app",projectId:"smartgarage-b90a4",storageBucket:"smartgarage-b90a4.firebasestorage.app",messagingSenderId:"933606087807",appId:"1:933606087807:web:eb8eeedc911b796d9df34a"};
 firebase.initializeApp(cfg);
-var auth=firebase.auth(),db=null,sr=null;
+var auth=firebase.auth(),db=null,sr=null,cmdRef=null;
 
-// ═══ COOLDOWN — previne spam pe butoane ═══
-var lastCmd=0;
-var COOLDOWN=800; // ms — nu permite comenzi mai repede de 800ms
+var lastCmd=0,CD=800;
+function cmdS(k,v){var n=Date.now();if(n-lastCmd<CD)return;lastCmd=n;if(db)db.ref('/garage/commands/'+k).set(v);}
+function togCmd(key,val){if(db)db.ref('/garage/commands/'+key).set(val);}
 
-function cmdSafe(k,v){
-  var now=Date.now();
-  if(now-lastCmd<COOLDOWN)return; // ignora daca prea repede
-  lastCmd=now;
-  if(db)db.ref('/garage/commands/'+k).set(v);
+var brT=null;
+function dbBr(){if(brT)clearTimeout(brT);brT=setTimeout(function(){if(db)db.ref('/garage/commands/light_brightness').set(parseInt(document.getElementById('sBr').value));},600);}
+
+function setColor(r,g,b,el){
+  if(!db)return;
+  db.ref('/garage/commands/led_r').set(r);
+  db.ref('/garage/commands/led_g').set(g);
+  db.ref('/garage/commands/led_b').set(b);
+  var btns=document.querySelectorAll('.cbtn');for(var i=0;i<btns.length;i++)btns[i].classList.remove('active');
+  if(el)el.classList.add('active');
 }
 
-// Debounce pt slider luminozitate — asteapta 600ms dupa ce opresti
-var brTimer=null;
-function debounceBr(){
-  if(brTimer)clearTimeout(brTimer);
-  brTimer=setTimeout(function(){
-    setV('light_brightness',parseInt(document.getElementById('sBr').value));
-  },600);
-}
-
-function setV(k,v){
-  var now=Date.now();
-  if(now-lastCmd<COOLDOWN)return;
-  lastCmd=now;
-  if(db)db.ref('/garage/commands/'+k).set(v);
-}
-
-// ═══ LOGIN ═══
 function doLogin(){
   var e=document.getElementById('le').value.trim(),p=document.getElementById('lp').value;
   var b=document.getElementById('lb'),er=document.getElementById('lerr');
@@ -244,33 +224,47 @@ auth.onAuthStateChanged(function(u){
     document.getElementById('loginScreen').style.display='none';
     document.getElementById('app').style.display='block';
     document.getElementById('ue').textContent=u.email;
-    db=firebase.database();listen();
+    db=firebase.database();
+    listenCommands(); // asculta toggle-uri din commands
+    listenSensors();  // asculta date senzori
   }else{
     document.getElementById('loginScreen').style.display='flex';
     document.getElementById('app').style.display='none';
     document.getElementById('lb').disabled=false;
     document.getElementById('lb').textContent='Conectare';
-    if(sr){sr.off();sr=null;}db=null;
+    if(sr){sr.off();sr=null;}
+    if(cmdRef){cmdRef.off();cmdRef=null;}
+    db=null;
   }
 });
 
-// Helpers
 var dayN=['Lu','Ma','Mi','Jo','Vi','Sa','Du'];
 function m2t(m){if(m<0)return'--:--';var h=Math.floor(m/60),mm=m%60;return(h<10?'0':'')+h+':'+(mm<10?'0':'')+mm;}
 function t2m(s){if(!s||s==='')return -1;var p=s.split(':');return parseInt(p[0])*60+parseInt(p[1]);}
 function d2t(bits){if(bits<=0)return'--';var r=[];for(var i=0;i<7;i++)if(bits&(1<<i))r.push(dayN[i]);return r.join(', ');}
+function rgbHex(r,g,b){return'#'+('0'+r.toString(16)).slice(-2)+('0'+g.toString(16)).slice(-2)+('0'+b.toString(16)).slice(-2);}
 
-// ═══ LISTENER ═══
-function listen(){
+// ═══ LISTENER COMENZI — toggle-uri se sincronizeaza de AICI ═══
+function listenCommands(){
   if(!db)return;
-  if(sr)sr.off();
-  sr=db.ref('/garage/sensors');
+  if(cmdRef)cmdRef.off();
+  cmdRef=db.ref('/garage/commands');
+  cmdRef.on('value',function(snap){
+    var c=snap.val();if(!c)return;
+    // Toggle-uri — sursa de adevar e /commands
+    if(c.light_auto!==undefined) document.getElementById('tAL').checked=c.light_auto;
+    if(c.obstacle_enabled!==undefined) document.getElementById('tObs').checked=c.obstacle_enabled;
+  });
+}
 
+// ═══ LISTENER SENZORI — NU sincronizeaza toggle-uri ═══
+function listenSensors(){
+  if(!db)return;if(sr)sr.off();
+  sr=db.ref('/garage/sensors');
   sr.on('value',function(snap){
     var d=snap.val();if(!d)return;
 
-    document.getElementById('cb').className='badge ok';
-    document.getElementById('cb').textContent='LIVE';
+    document.getElementById('cb').className='badge ok';document.getElementById('cb').textContent='LIVE';
 
     var o=d.door==='open';
     document.getElementById('ds').textContent=o?'DESCHISA':'INCHISA';
@@ -281,90 +275,59 @@ function listen(){
     document.getElementById('vT').textContent=d.temperature.toFixed(1)+' °C';
     document.getElementById('vH').textContent=d.humidity.toFixed(1)+' %';
     document.getElementById('vH').style.color=d.humidity>50?'#fb3':'#ddd';
-    document.getElementById('vD').textContent=d.distance.toFixed(1)+' cm';
-    document.getElementById('vD').style.color=d.distance<15?'#f55':'#ddd';
+    document.getElementById('vD').textContent=d.obstacle_enabled?d.distance.toFixed(1)+' cm':'OPRIT';
+    document.getElementById('vD').style.color=d.obstacle_enabled?(d.distance<15?'#f55':'#ddd'):'#777';
     document.getElementById('vL').textContent=d.ambient_light+(d.ambient_light<d.light_threshold?' (intuneric)':'');
     document.getElementById('vP').textContent=d.proximity;
-    document.getElementById('vO').textContent=d.obstacle?'DA !!':'Nu';
-    document.getElementById('vO').style.color=d.obstacle?'#f55':'#4a4';
-    document.getElementById('vLed').textContent=d.light?'ON ('+d.light_brightness+')':'OFF';
-    document.getElementById('vLed').style.color=d.light?'#fb3':'#777';
+    document.getElementById('vO').textContent=d.obstacle_enabled?(d.obstacle?'DA !!':'Nu'):'OPRIT';
+    document.getElementById('vO').style.color=d.obstacle_enabled?(d.obstacle?'#f55':'#4a4'):'#777';
+
+    var col=rgbHex(d.led_r||255,d.led_g||255,d.led_b||255);
+    document.getElementById('vLed').textContent=d.light?'ON '+col:'OFF';
+    document.getElementById('vLed').style.color=d.light?col:'#777';
+    document.getElementById('colorTxt').textContent=col;
 
     sB('D',Math.min(d.distance/200*100,100),d.distance.toFixed(0)+'cm',d.distance<15?'#f44':'#4a4');
     sB('L',Math.min(d.ambient_light/1000*100,100),d.ambient_light,d.ambient_light<50?'#5b9aff':'#da0');
     sB('T',Math.min(Math.max(d.temperature+10,0)/60*100,100),d.temperature.toFixed(1)+'°',d.temperature>35?'#f44':'#4a4');
     sB('H',d.humidity,d.humidity.toFixed(0)+'%',d.humidity>50?'#fb3':'#4a4');
 
-    document.getElementById('aObs').className='alr alr-r'+(d.obstacle?' show':'');
+    document.getElementById('aObs').className='alr alr-r'+(d.obstacle&&d.obstacle_enabled?' show':'');
     document.getElementById('aHum').className='alr alr-y'+(d.humidity>50?' show':'');
 
-    document.getElementById('tAL').checked=d.light_auto;
+    if(document.activeElement.id!=='sBr'){document.getElementById('sBr').value=d.light_brightness;document.getElementById('vBr').textContent=d.light_brightness;}
+    if(document.activeElement.id!=='iTh')document.getElementById('iTh').value=d.light_threshold;
 
-    // Slider/prag: sincronizare DOAR daca nu are focusul
-    if(document.activeElement.id!=='sBr'){
-      document.getElementById('sBr').value=d.light_brightness;
-      document.getElementById('vBr').textContent=d.light_brightness;
-    }
-    if(document.activeElement.id!=='iTh'){
-      document.getElementById('iTh').value=d.light_threshold;
-    }
-
-    // Programare — doar text info, NU suprascrie inputurile
     var sm=d.schedule_start_min!==undefined?d.schedule_start_min:-1;
     var em=d.schedule_end_min!==undefined?d.schedule_end_min:-1;
     var sd=d.schedule_days!==undefined?d.schedule_days:0;
     var info=document.getElementById('sInfo');
-    if(sm>=0&&em>=0&&sd>0){
-      info.textContent='Program activ: '+d2t(sd)+' | '+m2t(sm)+' - '+m2t(em);
-      info.style.color='#4a4';
-    }else{
-      info.textContent='Niciun program setat';
-      info.style.color='#5b9aff';
-    }
+    if(sm>=0&&em>=0&&sd>0){info.textContent='Activ: '+d2t(sd)+' | '+m2t(sm)+' - '+m2t(em);info.style.color='#4a4';}
+    else{info.textContent='Niciun program setat';info.style.color='#5b9aff';}
 
     document.getElementById('evM').textContent=d.last_event||'--';
-    if(d.timestamp){
-      var a=Math.max(0,Math.floor(Date.now()/1000)-d.timestamp);
-      var mm=Math.floor(a/60),ss=a%60;
-      document.getElementById('evT').textContent=(mm<10?'0':'')+mm+':'+(ss<10?'0':'')+ss+' ago';
-    }
+    if(d.timestamp){var a=Math.max(0,Math.floor(Date.now()/1000)-d.timestamp);var mm=Math.floor(a/60),ss=a%60;
+      document.getElementById('evT').textContent=(mm<10?'0':'')+mm+':'+(ss<10?'0':'')+ss+' ago';}
   });
-
-  db.ref('.info/connected').on('value',function(snap){
+  db.ref('.info/connected').on('value',function(s){
     var c=document.getElementById('cb');
-    if(snap.val()){c.className='badge ok';c.textContent='LIVE';}
-    else{c.className='badge er';c.textContent='OFFLINE';}
+    if(s.val()){c.className='badge ok';c.textContent='LIVE';}else{c.className='badge er';c.textContent='OFFLINE';}
   });
 }
 
-// Programare
 function setSched(){
-  if(!db)return;
-  var sMin=t2m(document.getElementById('schS').value);
-  var eMin=t2m(document.getElementById('schE').value);
-  var bits=0;
-  var cbs=document.querySelectorAll('#dayChecks input');
+  if(!db)return;var sM=t2m(document.getElementById('schS').value),eM=t2m(document.getElementById('schE').value);
+  var bits=0;var cbs=document.querySelectorAll('#dayChecks input');
   for(var i=0;i<cbs.length;i++){if(cbs[i].checked)bits|=(1<<parseInt(cbs[i].value));}
-  if(sMin<0||eMin<0||bits===0){alert('Selecteaza cel putin o zi si completeaza ambele ore!');return;}
-  db.ref('/garage/commands/schedule_start_min').set(sMin);
-  db.ref('/garage/commands/schedule_end_min').set(eMin);
-  db.ref('/garage/commands/schedule_days').set(bits);
+  if(sM<0||eM<0||bits===0){alert('Selecteaza cel putin o zi si completeaza ambele ore!');return;}
+  db.ref('/garage/commands/schedule_start_min').set(sM);db.ref('/garage/commands/schedule_end_min').set(eM);db.ref('/garage/commands/schedule_days').set(bits);
 }
 function clearSched(){
-  if(!db)return;
-  db.ref('/garage/commands/schedule_start_min').set(-1);
-  db.ref('/garage/commands/schedule_end_min').set(-1);
-  db.ref('/garage/commands/schedule_days').set(0);
-  document.getElementById('schS').value='';
-  document.getElementById('schE').value='';
-  var cbs=document.querySelectorAll('#dayChecks input');
-  for(var i=0;i<cbs.length;i++)cbs[i].checked=false;
+  if(!db)return;db.ref('/garage/commands/schedule_start_min').set(-1);db.ref('/garage/commands/schedule_end_min').set(-1);db.ref('/garage/commands/schedule_days').set(0);
+  document.getElementById('schS').value='';document.getElementById('schE').value='';
+  var cbs=document.querySelectorAll('#dayChecks input');for(var i=0;i<cbs.length;i++)cbs[i].checked=false;
 }
-function sB(id,p,t,c){
-  document.getElementById('g'+id).style.width=p+'%';
-  document.getElementById('g'+id).style.background=c;
-  document.getElementById('gv'+id).textContent=t;
-}
+function sB(id,p,t,c){document.getElementById('g'+id).style.width=p+'%';document.getElementById('g'+id).style.background=c;document.getElementById('gv'+id).textContent=t;}
 </script>
 </body>
 </html>
