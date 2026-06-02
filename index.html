@@ -3,114 +3,312 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Smart Garage </title>
+<title>Smart Garage</title>
+<link rel="icon" type="image/png" href="garage icon.png">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,sans-serif;background:#111;color:#ddd;min-height:100dvh}
-.bg{position:fixed;inset:0;z-index:0;background:url('bmw_bg.png') center/cover no-repeat;opacity:.18}
-.page{position:relative;z-index:1}
+body{font-family:Arial,Helvetica,sans-serif;background:#0a0a0a;color:#ccc;min-height:100dvh;background-image:url('porschegt3rs.jpg');background-size:cover;background-position:center;background-attachment:fixed}
+.page{position:relative;z-index:1;background:rgba(10,10,10,.70);min-height:100dvh}
+a{color:#e6a817}
+
+/* LOGIN */
 .login{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:16px}
-.lbox{width:100%;max-width:320px;background:rgba(25,25,35,.93);border:2px solid #3a6dd4;border-radius:8px;padding:28px 22px}
-.lbox h2{text-align:center;color:#5b9aff;font-size:1.2rem;margin-bottom:3px}
-.lbox .sub{text-align:center;color:#777;font-size:.75rem;margin-bottom:18px}
-.lbox label{display:block;color:#999;font-size:.78rem;margin:10px 0 3px}
-.lbox input[type=email],.lbox input[type=password]{width:100%;padding:9px 10px;background:#1a1a28;border:1px solid #444;border-radius:5px;color:#ddd;font-size:.85rem}
-.lbox input:focus{border-color:#5b9aff;outline:none}
-.lbtn{width:100%;padding:10px;margin-top:14px;border:none;border-radius:5px;background:#3a6dd4;color:#fff;font-weight:bold;font-size:.88rem;cursor:pointer}
-.lbtn:disabled{opacity:.5}
-.lerr{margin-top:10px;padding:7px;background:#3a1515;border:1px solid #933;border-radius:5px;color:#f66;font-size:.75rem;text-align:center;display:none}
+.lbox{width:100%;max-width:300px;background:rgba(15,15,15,.92);border:2px solid #e6a817;border-radius:6px;padding:24px 20px}
+.lbox h2{text-align:center;color:#e6a817;font-size:1.15rem;margin-bottom:2px}
+.lbox .sub{text-align:center;color:#666;font-size:.72rem;margin-bottom:16px}
+.lbox label{display:block;color:#888;font-size:.76rem;margin:8px 0 3px}
+.lbox input[type=email],.lbox input[type=password]{width:100%;padding:8px;background:#0a0a0a;border:1px solid #444;border-radius:4px;color:#ccc;font-size:.84rem}
+.lbox input:focus{border-color:#e6a817;outline:none}
+.lbtn{width:100%;padding:9px;margin-top:12px;border:none;border-radius:4px;background:#e6a817;color:#000;font-weight:bold;font-size:.85rem;cursor:pointer}
+.lbtn:disabled{opacity:.4}
+.lerr{margin-top:8px;padding:6px;background:#2a1010;border:1px solid #800;border-radius:4px;color:#f66;font-size:.72rem;text-align:center;display:none}
 .lerr.show{display:block}
-.lft{text-align:center;color:#333;font-size:.6rem;margin-top:14px}
+.lft{text-align:center;color:#333;font-size:.58rem;margin-top:12px}
+
+/* APP */
 #app{display:none}
-.hdr{background:rgba(18,18,30,.92);border-bottom:2px solid #3a6dd4;padding:10px 14px;text-align:center}
-.hdr h1{color:#5b9aff;font-size:1.1rem}.hdr .sub{color:#777;font-size:.7rem;margin-top:2px}
-.ubar{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:5px}
-.ubar span{font-size:.7rem;color:#999}
-.ubtn{font-size:.65rem;padding:2px 8px;border-radius:3px;border:1px solid #555;background:none;color:#f55;cursor:pointer}
-.badge{display:inline-block;font-size:.65rem;padding:2px 8px;border-radius:3px;margin-top:5px;font-weight:bold}
-.badge.ok{background:#1a3a1a;color:#4a4;border:1px solid #293}
-.badge.er{background:#3a1515;color:#f55;border:1px solid #933}
-.ct{padding:10px;max-width:460px;margin:0 auto}
-.alr{padding:8px;border-radius:5px;margin-bottom:8px;font-size:.8rem;font-weight:bold;text-align:center;display:none}
-.alr.show{display:block}.alr-r{background:#3a1515;border:1px solid #933;color:#f55}.alr-y{background:#3a3010;border:1px solid #a80;color:#fb3}
-.sec{background:rgba(22,22,35,.9);border:1px solid #333;border-radius:6px;padding:12px 14px;margin-bottom:10px}
-.sec-t{font-size:.72rem;color:#5b9aff;font-weight:bold;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid #2a2a3a}
-.door-d{text-align:center;padding:6px 0}.door-d .di{font-size:1.8rem}.door-d .dt{font-size:1.1rem;font-weight:bold;margin-top:3px}
-.dt.open{color:#4a4}.dt.closed{color:#f55}
-.brow{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
-.b{padding:10px;border:none;border-radius:5px;font-size:.82rem;font-weight:bold;cursor:pointer;color:#fff;transition:opacity .15s}
-.b:active{opacity:.8}.b:disabled{opacity:.25;cursor:not-allowed}
-.bg_{background:#2a7a2a}.br{background:#b22}.ba{background:#d90}.bx{background:#555}
+.hdr{
+  background:#111;
+  border-bottom:2px solid #e6a817;
+  padding:0 8px;
+  height:105px;
+  display:flex;
+  align-items:center;
+}
+
+.topbar{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  width:100%;
+  margin:0;
+}
+
+.brand{
+  justify-self:start;
+  text-align:left;
+  margin-top:14px;
+  margin-left:5px;
+}
+
+.brand .logo-title{
+  justify-content:flex-start;
+}
+
+.brand .sub{
+  margin-left:52px;
+  margin-top:4px;
+  color:#666;
+  font-size:.8rem;
+}
+
+.userbox{
+  justify-self:end;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:6px;
+  margin-top:14px;
+  margin-right:5px;
+}
+
+.user-info{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  color:#ccc;
+  font-size:.85rem;
+}
+
+.user-info img{
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  object-fit:cover;
+  border:1px solid #e6a817;
+}
+
+#cb{
+  justify-self:center;
+  align-self:center;
+  margin:0;
+}
+.ubar span{font-size:.68rem;color:#888}
+.ubtn{font-size:.62rem;padding:2px 6px;border-radius:3px;border:1px solid #555;background:none;color:#f55;cursor:pointer}
+.badge{display:inline-block;font-size:.62rem;padding:2px 7px;border-radius:3px;margin-top:4px;font-weight:bold}
+.badge.ok{background:#1a2a10;color:#8c3;border:1px solid #4a2}
+.badge.er{background:#2a1010;color:#f55;border:1px solid #800}
+.ct{padding:8px;max-width:440px;margin:0 auto}
+
+.alr{padding:7px;border-radius:4px;margin-bottom:7px;font-size:.78rem;font-weight:bold;text-align:center;display:none}
+.alr.show{display:block}
+.alr-r{background:#2a1010;border:1px solid #800;color:#f55}
+.alr-y{background:#2a2010;border:1px solid #a80;color:#fb3}
+
+.sec{background:#141414;border:1px solid #2a2a2a;border-radius:5px;padding:10px 12px;margin-bottom:8px}
+.sec-t{font-size:.7rem;color:#e6a817;font-weight:bold;text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px;padding-bottom:4px;border-bottom:1px solid #222}
+
+/* Usa */
+.door-d{text-align:center;padding:4px 0}
+.door-d .dt{font-size:1rem;font-weight:bold;margin-top:2px}
+.dt.open{color:#8c3}.dt.closed{color:#f55}.dt.moving{color:#e6a817}
+.brow{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:6px}
+.b{padding:9px;border:none;border-radius:4px;font-size:.8rem;font-weight:bold;cursor:pointer;color:#000}
+.b:active{opacity:.7}.b:disabled{opacity:.2;cursor:not-allowed}
+.bg_{background:#6a3}.br{background:#c33}.ba{background:#e6a817}.bx{background:#555;color:#ccc}
+
+/* Tabel */
 .stb{width:100%;border-collapse:collapse}
-.stb td{padding:6px 8px;border-bottom:1px solid #252535;font-size:.8rem}
-.stb td:first-child{color:#999}.stb td:last-child{font-weight:bold;text-align:right}
+.stb td{padding:5px 6px;border-bottom:1px solid #1a1a1a;font-size:.78rem}
+.stb td:first-child{color:#888}.stb td:last-child{font-weight:bold;text-align:right}
 .stb tr:last-child td{border-bottom:none}
-.bar{display:flex;align-items:center;gap:6px;margin:4px 0}
-.bar-l{font-size:.7rem;color:#999;width:70px;text-align:right}
-.bar-t{flex:1;height:7px;background:#1a1a2a;border-radius:3px;overflow:hidden;border:1px solid #333}
-.bar-f{height:100%;border-radius:3px;transition:width .4s}.bar-v{font-size:.68rem;color:#999;width:42px;font-weight:bold}
-.crow{display:flex;align-items:center;gap:8px;margin:7px 0;flex-wrap:wrap}
-.crow label{font-size:.78rem;color:#999;min-width:70px}
-.crow input[type=range]{flex:1;accent-color:#3a6dd4;min-width:100px}
-.crow input[type=number]{width:50px;padding:5px;background:#1a1a28;border:1px solid #444;border-radius:3px;color:#ddd;font-size:.8rem;text-align:center}
-.crow input[type=time]{padding:5px 8px;background:#1a1a28;border:1px solid #444;border-radius:3px;color:#ddd;font-size:.82rem}
-.crow .vl{font-size:.8rem;color:#5b9aff;font-weight:bold;min-width:30px;text-align:right}
-.tw{display:flex;justify-content:space-between;align-items:center;padding:6px 0}
-.tw+.tw{border-top:1px solid #252535}
-.tw span{font-size:.78rem;color:#bbb}
-.tw .hint{font-size:.62rem;color:#666;display:block}
-.tg{position:relative;width:36px;height:18px;flex-shrink:0}
+
+/* Bare */
+.bar{display:flex;align-items:center;gap:5px;margin:3px 0}
+.bar-l{font-size:.68rem;color:#888;width:65px;text-align:right}
+.bar-t{flex:1;height:6px;background:#1a1a1a;border-radius:3px;overflow:hidden}
+.bar-f{height:100%;border-radius:3px;transition:width .4s}
+.bar-v{font-size:.66rem;color:#888;width:38px;font-weight:bold}
+
+/* Controale */
+.crow{display:flex;align-items:center;gap:6px;margin:6px 0;flex-wrap:wrap}
+.crow label{font-size:.76rem;color:#888;min-width:65px}
+.crow input[type=range]{flex:1;accent-color:#e6a817;min-width:80px}
+.crow input[type=number]{width:46px;padding:4px;background:#0a0a0a;border:1px solid #333;border-radius:3px;color:#ccc;font-size:.78rem;text-align:center}
+.crow input[type=time]{padding:4px 6px;background:#0a0a0a;border:1px solid #333;border-radius:3px;color:#ccc;font-size:.78rem}
+.crow .vl{font-size:.78rem;color:#e6a817;font-weight:bold;min-width:28px;text-align:right}
+
+/* Toggle */
+.tw{display:flex;justify-content:space-between;align-items:center;padding:5px 0}
+.tw+.tw{border-top:1px solid #1a1a1a}
+.tw span{font-size:.76rem;color:#aaa}
+.tw .hint{font-size:.6rem;color:#555;display:block}
+.tg{position:relative;width:34px;height:17px;flex-shrink:0}
 .tg input{opacity:0;width:0;height:0;position:absolute}
-.tg .tk{position:absolute;inset:0;background:#333;border-radius:9px;cursor:pointer;transition:.2s;border:1px solid #555}
-.tg .tk:before{content:'';position:absolute;width:12px;height:12px;left:3px;bottom:2px;background:#ccc;border-radius:50%;transition:.2s}
-.tg input:checked+.tk{background:#3a6dd4;border-color:#5b9aff}
-.tg input:checked+.tk:before{transform:translateX(16px);background:#fff}
-.days{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0}
-.days label{display:flex;align-items:center;gap:3px;font-size:.72rem;color:#bbb;cursor:pointer;background:#1a1a28;padding:4px 7px;border-radius:3px;border:1px solid #333}
-.days input{accent-color:#3a6dd4;width:13px;height:13px}
-.ev{font-size:.75rem;padding:7px 10px;background:#0a0a14;border-radius:3px;border-left:3px solid #3a6dd4;color:#999}
-.ev .et{color:#5b9aff;font-weight:bold}
-.sinfo{font-size:.72rem;color:#5b9aff;margin-top:6px;padding:5px 8px;background:#0a0a1a;border-radius:3px}
-.mby{text-align:center;color:#444;font-size:.68rem;margin-top:16px;padding-bottom:20px;font-style:italic}
-.colors{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
-.cbtn{width:32px;height:32px;border-radius:50%;border:2px solid #444;cursor:pointer;transition:border .15s}
-.cbtn:hover{border-color:#fff}.cbtn.active{border-color:#5b9aff;border-width:3px}
+.tg .tk{position:absolute;inset:0;background:#333;border-radius:8px;cursor:pointer;transition:.2s}
+.tg .tk:before{content:'';position:absolute;width:11px;height:11px;left:3px;bottom:3px;background:#888;border-radius:50%;transition:.2s}
+.tg input:checked+.tk{background:#e6a817}
+.tg input:checked+.tk:before{transform:translateX(16px);background:#000}
+
+.days{display:flex;gap:3px;flex-wrap:wrap;margin:5px 0}
+.days label{display:flex;align-items:center;gap:2px;font-size:.7rem;color:#aaa;cursor:pointer;background:#1a1a1a;padding:3px 6px;border-radius:3px;border:1px solid #2a2a2a}
+.days input{accent-color:#e6a817;width:12px;height:12px}
+
+.ev{font-size:.72rem;padding:6px 8px;background:#0a0a0a;border-radius:3px;border-left:3px solid #e6a817;color:#888}
+.ev .et{color:#e6a817;font-weight:bold}
+.sinfo{font-size:.7rem;color:#888;margin-top:5px;padding:4px 6px;background:#0a0a0a;border-radius:3px}
+
+/* Culori preset */
+.colors{display:flex;gap:5px;flex-wrap:wrap;margin:6px 0}
+.cbtn{width:28px;height:28px;border-radius:50%;border:2px solid #333;cursor:pointer}
+.cbtn:hover{border-color:#e6a817}
+.cbtn.active{border-color:#e6a817;border-width:3px}
+
+/* Custom RGB */
+.rgb-row{display:flex;gap:4px;align-items:center;margin:6px 0}
+.rgb-row span{font-size:.72rem;color:#888;min-width:14px}
+.rgb-row input{width:48px;padding:3px;background:#0a0a0a;border:1px solid #333;border-radius:3px;color:#ccc;font-size:.76rem;text-align:center}
+.rgb-btn{padding:4px 10px;border:none;border-radius:3px;background:#e6a817;color:#000;font-size:.72rem;font-weight:bold;cursor:pointer;margin-left:4px}
+
+.mby{text-align:center;color:#333;font-size:.62rem;margin-top:14px;padding-bottom:16px}
+
+.logo-title{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}
+
+.logo-title img{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #e6a817;
+}
+
+.login-title{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}
+
+.login-title img{
+
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #e6a817;
+}
+
+.topbar{
+  position:relative;
+  width:100%;
+  height:100%;
+}
+
+.brand{
+  position:absolute;
+  left:0;
+  top:50%;
+  transform:translateY(-50%);
+  text-align:left;
+}
+
+.userbox{
+  position:absolute;
+  right:0;
+  top:50%;
+  transform:translateY(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:6px;
+}
+
+#cb{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+}
+
 </style>
 </head>
 <body>
-<div class="bg"></div>
 <div class="page">
+
 <div id="loginScreen" class="login">
 <div class="lbox">
-  <h2>Smart Garage</h2><p class="sub">ESP32 + Firebase v6.0</p>
+  <h2 class="login-title">
+  <img src="garage icon.png" alt="Garage Icon">
+  Smart Garage
+</h2>
   <label>Email</label><input type="email" id="le" placeholder="email@exemplu.com">
   <label>Parola</label><input type="password" id="lp" placeholder="parola">
   <button class="lbtn" id="lb" onclick="doLogin()">Conectare</button>
-  <div id="lerr" class="lerr"></div><p class="lft">Made by Valentin</p>
+  <div id="lerr" class="lerr"></div><p class="lft">Made by Valentin — Smart Garage </p>
 </div></div>
 
 <div id="app">
 <div class="hdr">
-  <h1>Smart Garage v6.0</h1><div class="sub">ESP32 + APDS-9930 + AHT10 + WS2812</div>
-  <div class="ubar"><span id="ue"></span><button class="ubtn" onclick="doLogout()">Logout</button></div>
-  <div id="cb" class="badge ok">LIVE</div>
-</div>
-<div class="ct">
-  <div id="aObs" class="alr alr-r">!! OBSTACOL — usa blocata !!</div>
-  <div id="aHum" class="alr alr-y">!! Umiditate peste 50% !!</div>
+  <div class="topbar">
 
-  <div class="sec"><div class="sec-t">Usa garaj (2 servo tandem)</div>
-    <div class="door-d"><div class="di">🚪</div><div id="ds" class="dt closed">INCHISA</div></div>
+    <div class="brand">
+      <h1 class="logo-title">
+        <img src="garage icon.png" alt="Garage Icon">
+        Smart Garage
+      </h1>
+      <div class="sub">Made by Valentin</div>
+    </div>
+
+    <div id="cb" class="badge ok">LIVE</div>
+
+    <div class="userbox">
+      <div class="user-info">
+        <img src="poza login.jpg" alt="User">
+        <span id="ue"></span>
+      </div>
+      <button class="ubtn" onclick="doLogout()">Logout</button>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="ct">
+  <div id="aObs" class="alr alr-r">OBSTACOL — usa blocata!</div>
+  <div id="aHum" class="alr alr-y">Atentie!Umiditate peste 50% — poate cauza coroziune sau rugina pe caroserie, ! </div>
+
+  <div class="sec"><div class="sec-t">Usa garaj</div>
+    <div class="door-d"><div id="ds" class="dt closed">INCHISA</div></div>
     <div class="brow"><button class="b bg_" id="bOpen" onclick="cmdS('door_cmd','open')">OPEN</button><button class="b br" id="bClose" onclick="cmdS('door_cmd','close')">CLOSE</button></div>
+    <div class="tw" style="margin-top:8px;padding-top:8px;border-top:1px solid #222"><span>Detectie obstacol HC-SR04<span class="hint">Detecteaza obiectele din fata usii garajului.</span></span><label class="tg"><input type="checkbox" id="tObs" onchange="togC('obstacle_enabled',this.checked)"><span class="tk"></span></label></div>
+  </div>
+
+  <div class="sec"><div class="sec-t">Temperatura si umiditate (AHT10)</div>
+    <div style="display:flex;gap:12px;margin-bottom:6px">
+      <div style="flex:1;text-align:center;padding:10px 0;background:#1a1a0a;border:1px solid #2a2a10;border-radius:5px">
+        <div style="font-size:.68rem;color:#888;margin-bottom:3px">TEMPERATURA</div>
+        <div id="vTbig" style="font-size:1.4rem;font-weight:bold;color:#e6a817">-- °C</div>
+      </div>
+      <div style="flex:1;text-align:center;padding:10px 0;background:#1a1a0a;border:1px solid #2a2a10;border-radius:5px">
+        <div style="font-size:.68rem;color:#888;margin-bottom:3px">UMIDITATE</div>
+        <div id="vHbig" style="font-size:1.4rem;font-weight:bold;color:#e6a817">-- %</div>
+      </div>
+    </div>
+    <div id="humWarn" style="display:none;font-size:.7rem;color:#fb3;padding:5px 8px;background:#1a1508;border:1px solid #3a2a08;border-radius:4px">Umiditatea ridicata poate cauza coroziune si rugina pe caroserie, deteriorarea garniturilor si condensul poate afecta instalatia electrica a vehiculului.</div>
   </div>
 
   <div class="sec"><div class="sec-t">Senzori</div>
     <table class="stb">
       <tr><td>Temperatura</td><td id="vT">--</td></tr>
       <tr><td>Umiditate</td><td id="vH">--</td></tr>
-      <tr><td>Distanta HC-SR04</td><td id="vD">--</td></tr>
-      <tr><td>Lumina APDS</td><td id="vL">--</td></tr>
-      <tr><td>Proximitate APDS</td><td id="vP">--</td></tr>
+      <tr><td>Distanta</td><td id="vD">--</td></tr>
+      <tr><td>Lumina</td><td id="vL">--</td></tr>
+      <tr><td>Proximitate</td><td id="vP">--</td></tr>
       <tr><td>Obstacol</td><td id="vO">--</td></tr>
       <tr><td>Ring LED</td><td id="vLed">--</td></tr>
     </table>
@@ -123,62 +321,66 @@ body{font-family:Arial,sans-serif;background:#111;color:#ddd;min-height:100dvh}
     <div class="bar"><span class="bar-l">Umiditate</span><div class="bar-t"><div id="gH" class="bar-f" style="width:0%"></div></div><span class="bar-v" id="gvH">--</span></div>
   </div>
 
-  <div class="sec"><div class="sec-t">Ring LED WS2812 (12 LED RGB)</div>
+  <div class="sec"><div class="sec-t">Ring LED WS2812</div>
     <div class="brow">
       <button class="b ba" onclick="cmdS('light_cmd','on')">ON</button>
       <button class="b bx" onclick="cmdS('light_cmd','off')">OFF</button>
     </div>
-    <p style="font-size:.65rem;color:#666;margin-top:4px">OFF dezactiveaza si lumina automata. Reactivezi de mai jos.</p>
-    <div class="crow" style="margin-top:10px">
+    <p style="font-size:.62rem;color:#555;margin-top:3px">OFF dezactiveaza si lumina automata</p>
+    <div class="crow" style="margin-top:8px">
       <label>Intensitate:</label>
       <input type="range" id="sBr" min="0" max="255" value="255" step="5" oninput="document.getElementById('vBr').textContent=this.value" onchange="dbBr()">
       <span class="vl" id="vBr">255</span>
     </div>
-    <p style="font-size:.72rem;color:#999;margin:6px 0 2px">Culoare:</p>
+    <p style="font-size:.72rem;color:#888;margin:5px 0 2px">Culoare preset:</p>
     <div class="colors">
-      <div class="cbtn" style="background:#fff" onclick="setColor(255,255,255,this)" title="Alb"></div>
-      <div class="cbtn" style="background:#f44" onclick="setColor(255,68,68,this)" title="Rosu"></div>
-      <div class="cbtn" style="background:#4f4" onclick="setColor(68,255,68,this)" title="Verde"></div>
-      <div class="cbtn" style="background:#44f" onclick="setColor(68,68,255,this)" title="Albastru"></div>
-      <div class="cbtn" style="background:#ff0" onclick="setColor(255,255,0,this)" title="Galben"></div>
-      <div class="cbtn" style="background:#f0f" onclick="setColor(255,0,255,this)" title="Mov"></div>
-      <div class="cbtn" style="background:#0ff" onclick="setColor(0,255,255,this)" title="Cyan"></div>
-      <div class="cbtn" style="background:#f90" onclick="setColor(255,153,0,this)" title="Portocaliu"></div>
-      <div class="cbtn" style="background:#f69" onclick="setColor(255,102,153,this)" title="Roz"></div>
+      <div class="cbtn" style="background:#fff" onclick="setC(255,255,255,this)"></div>
+      <div class="cbtn" style="background:#f44" onclick="setC(255,68,68,this)"></div>
+      <div class="cbtn" style="background:#4f4" onclick="setC(68,255,68,this)"></div>
+      <div class="cbtn" style="background:#44f" onclick="setC(68,68,255,this)"></div>
+      <div class="cbtn" style="background:#ff0" onclick="setC(255,255,0,this)"></div>
+      <div class="cbtn" style="background:#f0f" onclick="setC(255,0,255,this)"></div>
+      <div class="cbtn" style="background:#0ff" onclick="setC(0,255,255,this)"></div>
+      <div class="cbtn" style="background:#f90" onclick="setC(255,153,0,this)"></div>
     </div>
-    <div style="font-size:.72rem;color:#777;margin-top:4px">Culoare activa: <span id="colorTxt" style="font-weight:bold;color:#5b9aff">#ffffff</span></div>
-    <div class="crow" style="margin-top:8px">
+    <p style="font-size:.72rem;color:#888;margin:5px 0 2px">Culoare custom:</p>
+    <div class="rgb-row">
+      <input type="color" id="cWheel" value="#ffffff" style="width:42px;height:34px;border:1px solid #333;border-radius:4px;background:#0a0a0a;cursor:pointer;padding:1px" oninput="wheelSync()" onchange="wheelSend()">
+      <span>R</span><input type="number" id="cR" min="0" max="255" value="255" onchange="rgbSync()">
+      <span>G</span><input type="number" id="cG" min="0" max="255" value="255" onchange="rgbSync()">
+      <span>B</span><input type="number" id="cB" min="0" max="255" value="255" onchange="rgbSync()">
+      <button class="rgb-btn" onclick="setCustom()">Set</button>
+    </div>
+    <div style="font-size:.7rem;color:#666;margin-top:4px">Culoare: <span id="colorTxt" style="color:#e6a817">#ffffff</span></div>
+    <div class="crow" style="margin-top:6px">
       <label>Prag lumina:</label>
-      <input type="number" id="iTh" min="1" max="4000" value="50" style="width:60px">
-      <button class="b bx" style="padding:5px 10px;font-size:.75rem" onclick="cmdS('light_threshold',parseInt(document.getElementById('iTh').value))">Set</button>
+      <input type="number" id="iTh" min="1" max="4000" value="50" style="width:55px">
+      <button class="b bx" style="padding:4px 8px;font-size:.72rem" onclick="cmdS('light_threshold',parseInt(document.getElementById('iTh').value))">Set</button>
     </div>
+    <div class="tw" style="margin-top:8px;padding-top:8px;border-top:1px solid #222"><span>Lumina automata<span class="hint">functioneaza doar cu lumina OFF; sensibilitatea depinde de intensitatea LED-ului si de pragul setat</span></span><label class="tg"><input type="checkbox" id="tAL" onchange="togC('light_auto',this.checked)"><span class="tk"></span></label></div>
   </div>
 
   <div class="sec"><div class="sec-t">Programare lumina</div>
-    <p style="font-size:.72rem;color:#777;margin-bottom:6px">Alege zilele si ora (HH:MM):</p>
     <div class="days" id="dayChecks">
       <label><input type="checkbox" value="0"> Lu</label><label><input type="checkbox" value="1"> Ma</label>
       <label><input type="checkbox" value="2"> Mi</label><label><input type="checkbox" value="3"> Jo</label>
       <label><input type="checkbox" value="4"> Vi</label><label><input type="checkbox" value="5"> Sa</label>
       <label><input type="checkbox" value="6"> Du</label>
     </div>
-    <div class="crow"><label>De la:</label><input type="time" id="schS" value=""></div>
-    <div class="crow"><label>Pana la:</label><input type="time" id="schE" value=""></div>
-    <button class="b bx" style="width:100%;margin-top:8px;padding:9px;font-size:.8rem" onclick="setSched()">Salveaza program</button>
-    <button class="b br" style="width:100%;margin-top:4px;padding:7px;font-size:.75rem" onclick="clearSched()">Sterge program</button>
-    <div class="sinfo" id="sInfo">Niciun program setat</div>
+    <div class="crow"><label>De la:</label><input type="time" id="schS"></div>
+    <div class="crow"><label>Pana la:</label><input type="time" id="schE"></div>
+    <button class="b bx" style="width:100%;margin-top:6px;padding:8px;font-size:.78rem" onclick="setSch()">Salveaza</button>
+    <button class="b br" style="width:100%;margin-top:3px;padding:6px;font-size:.72rem" onclick="clrSch()">Sterge</button>
+    <div class="sinfo" id="sInfo">Niciun program</div>
   </div>
 
-  <div class="sec"><div class="sec-t">Setari senzori</div>
-    <div class="tw"><span>Lumina automata pe intuneric<span class="hint">(aprinde ring cand e intuneric, doar cu lumina OFF)</span></span><label class="tg"><input type="checkbox" id="tAL" onchange="togCmd('light_auto',this.checked)"><span class="tk"></span></label></div>
-    <div class="tw"><span>Detectie obstacol HC-SR04<span class="hint">(ON = senzor activ, OFF = oprit complet)</span></span><label class="tg"><input type="checkbox" id="tObs" onchange="togCmd('obstacle_enabled',this.checked)"><span class="tk"></span></label></div>
-  </div>
 
   <div class="sec"><div class="sec-t">Ultimul eveniment</div>
-    <div class="ev"><span class="et" id="evT">00:00</span> — <span id="evM">Asteptare...</span></div>
+    <div class="ev"><span class="et" id="evT">--:--</span> — <span id="evM">...</span></div>
   </div>
-  <p class="mby">Made by Valentin — Smart Garage v6.0</p>
-</div></div></div>
+  <p class="mby">Made by Valentin — Smart Garage </p>
+</div></div>
+</div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
@@ -186,111 +388,127 @@ body{font-family:Arial,sans-serif;background:#111;color:#ddd;min-height:100dvh}
 <script>
 var cfg={apiKey:"AIzaSyCYaN2NDY_ON5G7871oRwxClv-zGByIQ64",authDomain:"smartgarage-b90a4.firebaseapp.com",databaseURL:"https://smartgarage-b90a4-default-rtdb.europe-west1.firebasedatabase.app",projectId:"smartgarage-b90a4",storageBucket:"smartgarage-b90a4.firebasestorage.app",messagingSenderId:"933606087807",appId:"1:933606087807:web:eb8eeedc911b796d9df34a"};
 firebase.initializeApp(cfg);
-var auth=firebase.auth(),db=null,sr=null,cmdRef=null;
+var auth=firebase.auth(),db=null,sr=null,cr=null;
 
-var lastCmd=0,CD=800;
-function cmdS(k,v){var n=Date.now();if(n-lastCmd<CD)return;lastCmd=n;if(db)db.ref('/garage/commands/'+k).set(v);}
-function togCmd(key,val){if(db)db.ref('/garage/commands/'+key).set(val);}
+var lc=0,CD=800;
+function cmdS(k,v){var n=Date.now();if(n-lc<CD)return;lc=n;if(db)db.ref('/garage/commands/'+k).set(v);}
+function togC(k,v){if(db)db.ref('/garage/commands/'+k).set(v);}
 
 var brT=null;
-function dbBr(){if(brT)clearTimeout(brT);brT=setTimeout(function(){if(db)db.ref('/garage/commands/light_brightness').set(parseInt(document.getElementById('sBr').value));},600);}
+function dbBr(){if(brT)clearTimeout(brT);brT=setTimeout(function(){if(db)db.ref('/garage/commands/light_brightness').set(parseInt(document.getElementById('sBr').value));},500);}
 
-function setColor(r,g,b,el){
+function setC(r,g,b,el){
   if(!db)return;
-  db.ref('/garage/commands/led_r').set(r);
-  db.ref('/garage/commands/led_g').set(g);
-  db.ref('/garage/commands/led_b').set(b);
-  var btns=document.querySelectorAll('.cbtn');for(var i=0;i<btns.length;i++)btns[i].classList.remove('active');
+  db.ref('/garage/commands/led_r').set(r);db.ref('/garage/commands/led_g').set(g);db.ref('/garage/commands/led_b').set(b);
+  document.querySelectorAll('.cbtn').forEach(function(x){x.classList.remove('active');});
   if(el)el.classList.add('active');
+  document.getElementById('cR').value=r;document.getElementById('cG').value=g;document.getElementById('cB').value=b;
+  document.getElementById('cWheel').value=rH(r,g,b);
+}
+function setCustom(){
+  var r=parseInt(document.getElementById('cR').value)||0;
+  var g=parseInt(document.getElementById('cG').value)||0;
+  var b=parseInt(document.getElementById('cB').value)||0;
+  r=Math.max(0,Math.min(255,r));g=Math.max(0,Math.min(255,g));b=Math.max(0,Math.min(255,b));
+  if(!db)return;
+  db.ref('/garage/commands/led_r').set(r);db.ref('/garage/commands/led_g').set(g);db.ref('/garage/commands/led_b').set(b);
+  document.querySelectorAll('.cbtn').forEach(function(x){x.classList.remove('active');});
+  document.getElementById('cWheel').value=rH(r,g,b);
+}
+// Color wheel → sync R/G/B inputs live
+function wheelSync(){
+  var hex=document.getElementById('cWheel').value;
+  document.getElementById('cR').value=parseInt(hex.substr(1,2),16);
+  document.getElementById('cG').value=parseInt(hex.substr(3,2),16);
+  document.getElementById('cB').value=parseInt(hex.substr(5,2),16);
+}
+// Color wheel → trimite la Firebase cand inchizi picker-ul
+function wheelSend(){
+  wheelSync();setCustom();
+}
+// R/G/B inputs → sync color wheel
+function rgbSync(){
+  var r=Math.max(0,Math.min(255,parseInt(document.getElementById('cR').value)||0));
+  var g=Math.max(0,Math.min(255,parseInt(document.getElementById('cG').value)||0));
+  var b=Math.max(0,Math.min(255,parseInt(document.getElementById('cB').value)||0));
+  document.getElementById('cWheel').value=rH(r,g,b);
 }
 
 function doLogin(){
   var e=document.getElementById('le').value.trim(),p=document.getElementById('lp').value;
   var b=document.getElementById('lb'),er=document.getElementById('lerr');
-  if(!e||!p){er.textContent='Completeaza email si parola.';er.classList.add('show');return;}
-  b.disabled=true;b.textContent='Se conecteaza...';er.classList.remove('show');
+  if(!e||!p){er.textContent='Completeaza ambele campuri';er.classList.add('show');return;}
+  b.disabled=true;b.textContent='...';er.classList.remove('show');
   auth.signInWithEmailAndPassword(e,p).catch(function(x){
     b.disabled=false;b.textContent='Conectare';er.classList.add('show');
-    var m={'auth/user-not-found':'Utilizator inexistent.','auth/wrong-password':'Parola gresita.',
-      'auth/invalid-credential':'Email sau parola gresita.','auth/too-many-requests':'Prea multe incercari.'};
-    er.textContent=m[x.code]||x.message;
+    er.textContent=x.code=='auth/invalid-credential'?'Email sau parola gresita':x.message;
   });
 }
 function doLogout(){auth.signOut();}
 document.getElementById('lp').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
 
 auth.onAuthStateChanged(function(u){
-  if(u){
-    document.getElementById('loginScreen').style.display='none';
-    document.getElementById('app').style.display='block';
-    document.getElementById('ue').textContent=u.email;
-    db=firebase.database();
-    listenCommands(); // asculta toggle-uri din commands
-    listenSensors();  // asculta date senzori
-  }else{
-    document.getElementById('loginScreen').style.display='flex';
-    document.getElementById('app').style.display='none';
-    document.getElementById('lb').disabled=false;
-    document.getElementById('lb').textContent='Conectare';
-    if(sr){sr.off();sr=null;}
-    if(cmdRef){cmdRef.off();cmdRef=null;}
-    db=null;
-  }
+  if(u){document.getElementById('loginScreen').style.display='none';document.getElementById('app').style.display='block';
+    document.getElementById('ue').textContent=u.email;db=firebase.database();listenCmd();listenSens();}
+  else{document.getElementById('loginScreen').style.display='flex';document.getElementById('app').style.display='none';
+    document.getElementById('lb').disabled=false;document.getElementById('lb').textContent='Conectare';
+    if(sr){sr.off();sr=null;}if(cr){cr.off();cr=null;}db=null;}
 });
 
-var dayN=['Lu','Ma','Mi','Jo','Vi','Sa','Du'];
+var dn=['Lu','Ma','Mi','Jo','Vi','Sa','Du'];
 function m2t(m){if(m<0)return'--:--';var h=Math.floor(m/60),mm=m%60;return(h<10?'0':'')+h+':'+(mm<10?'0':'')+mm;}
-function t2m(s){if(!s||s==='')return -1;var p=s.split(':');return parseInt(p[0])*60+parseInt(p[1]);}
-function d2t(bits){if(bits<=0)return'--';var r=[];for(var i=0;i<7;i++)if(bits&(1<<i))r.push(dayN[i]);return r.join(', ');}
-function rgbHex(r,g,b){return'#'+('0'+r.toString(16)).slice(-2)+('0'+g.toString(16)).slice(-2)+('0'+b.toString(16)).slice(-2);}
+function t2m(s){if(!s)return -1;var p=s.split(':');return parseInt(p[0])*60+parseInt(p[1]);}
+function d2t(b){if(b<=0)return'--';var r=[];for(var i=0;i<7;i++)if(b&(1<<i))r.push(dn[i]);return r.join(', ');}
+function rH(r,g,b){return'#'+('0'+r.toString(16)).slice(-2)+('0'+g.toString(16)).slice(-2)+('0'+b.toString(16)).slice(-2);}
 
-// ═══ LISTENER COMENZI — toggle-uri se sincronizeaza de AICI ═══
-function listenCommands(){
-  if(!db)return;
-  if(cmdRef)cmdRef.off();
-  cmdRef=db.ref('/garage/commands');
-  cmdRef.on('value',function(snap){
-    var c=snap.val();if(!c)return;
-    // Toggle-uri — sursa de adevar e /commands
-    if(c.light_auto!==undefined) document.getElementById('tAL').checked=c.light_auto;
-    if(c.obstacle_enabled!==undefined) document.getElementById('tObs').checked=c.obstacle_enabled;
+function listenCmd(){
+  if(!db)return;if(cr)cr.off();
+  cr=db.ref('/garage/commands');
+  cr.on('value',function(s){var c=s.val();if(!c)return;
+    if(c.light_auto!==undefined)document.getElementById('tAL').checked=c.light_auto;
+    if(c.obstacle_enabled!==undefined)document.getElementById('tObs').checked=c.obstacle_enabled;
   });
 }
 
-// ═══ LISTENER SENZORI — NU sincronizeaza toggle-uri ═══
-function listenSensors(){
+function listenSens(){
   if(!db)return;if(sr)sr.off();
   sr=db.ref('/garage/sensors');
-  sr.on('value',function(snap){
-    var d=snap.val();if(!d)return;
-
+  sr.on('value',function(s){
+    var d=s.val();if(!d)return;
     document.getElementById('cb').className='badge ok';document.getElementById('cb').textContent='LIVE';
 
-    var o=d.door==='open';
-    document.getElementById('ds').textContent=o?'DESCHISA':'INCHISA';
-    document.getElementById('ds').className='dt '+(o?'open':'closed');
-    document.getElementById('bOpen').disabled=d.obstacle;
-    document.getElementById('bClose').disabled=d.obstacle;
+    // Usa — cu stare "SE MISCA"
+    var ds=document.getElementById('ds');
+    if(d.door_moving){ds.textContent='SE MISCA...';ds.className='dt moving';}
+    else if(d.door==='open'){ds.textContent='DESCHISA';ds.className='dt open';}
+    else{ds.textContent='INCHISA';ds.className='dt closed';}
+    document.getElementById('bOpen').disabled=d.obstacle||d.door_moving;
+    document.getElementById('bClose').disabled=d.obstacle||d.door_moving;
 
     document.getElementById('vT').textContent=d.temperature.toFixed(1)+' °C';
     document.getElementById('vH').textContent=d.humidity.toFixed(1)+' %';
-    document.getElementById('vH').style.color=d.humidity>50?'#fb3':'#ddd';
+    document.getElementById('vH').style.color=d.humidity>50?'#fb3':'#ccc';
+    document.getElementById('vTbig').textContent=d.temperature.toFixed(1)+' °C';
+    document.getElementById('vTbig').style.color=d.temperature>35?'#f44':'#e6a817';
+    document.getElementById('vHbig').textContent=d.humidity.toFixed(1)+' %';
+    document.getElementById('vHbig').style.color=d.humidity>50?'#f44':'#e6a817';
+    document.getElementById('humWarn').style.display=d.humidity>50?'block':'none';
     document.getElementById('vD').textContent=d.obstacle_enabled?d.distance.toFixed(1)+' cm':'OPRIT';
-    document.getElementById('vD').style.color=d.obstacle_enabled?(d.distance<15?'#f55':'#ddd'):'#777';
+    document.getElementById('vD').style.color=d.obstacle_enabled?(d.distance<15?'#f55':'#ccc'):'#555';
     document.getElementById('vL').textContent=d.ambient_light+(d.ambient_light<d.light_threshold?' (intuneric)':'');
     document.getElementById('vP').textContent=d.proximity;
-    document.getElementById('vO').textContent=d.obstacle_enabled?(d.obstacle?'DA !!':'Nu'):'OPRIT';
-    document.getElementById('vO').style.color=d.obstacle_enabled?(d.obstacle?'#f55':'#4a4'):'#777';
+    document.getElementById('vO').textContent=d.obstacle_enabled?(d.obstacle?'DA!':'Nu'):'OPRIT';
+    document.getElementById('vO').style.color=d.obstacle_enabled?(d.obstacle?'#f55':'#8c3'):'#555';
 
-    var col=rgbHex(d.led_r||255,d.led_g||255,d.led_b||255);
-    document.getElementById('vLed').textContent=d.light?'ON '+col:'OFF';
-    document.getElementById('vLed').style.color=d.light?col:'#777';
-    document.getElementById('colorTxt').textContent=col;
+    var cl=rH(d.led_r||255,d.led_g||255,d.led_b||255);
+    document.getElementById('vLed').textContent=d.light?'ON '+cl:'OFF';
+    document.getElementById('vLed').style.color=d.light?cl:'#555';
+    document.getElementById('colorTxt').textContent=cl;
 
-    sB('D',Math.min(d.distance/200*100,100),d.distance.toFixed(0)+'cm',d.distance<15?'#f44':'#4a4');
-    sB('L',Math.min(d.ambient_light/1000*100,100),d.ambient_light,d.ambient_light<50?'#5b9aff':'#da0');
-    sB('T',Math.min(Math.max(d.temperature+10,0)/60*100,100),d.temperature.toFixed(1)+'°',d.temperature>35?'#f44':'#4a4');
-    sB('H',d.humidity,d.humidity.toFixed(0)+'%',d.humidity>50?'#fb3':'#4a4');
+    sB('D',Math.min(d.distance/200*100,100),d.distance.toFixed(0)+'cm',d.distance<15?'#f44':'#8c3');
+    sB('L',Math.min(d.ambient_light/1000*100,100),d.ambient_light,d.ambient_light<50?'#e6a817':'#da0');
+    sB('T',Math.min(Math.max(d.temperature+10,0)/60*100,100),d.temperature.toFixed(1)+'°',d.temperature>35?'#f44':'#8c3');
+    sB('H',d.humidity,d.humidity.toFixed(0)+'%',d.humidity>50?'#fb3':'#8c3');
 
     document.getElementById('aObs').className='alr alr-r'+(d.obstacle&&d.obstacle_enabled?' show':'');
     document.getElementById('aHum').className='alr alr-y'+(d.humidity>50?' show':'');
@@ -301,9 +519,9 @@ function listenSensors(){
     var sm=d.schedule_start_min!==undefined?d.schedule_start_min:-1;
     var em=d.schedule_end_min!==undefined?d.schedule_end_min:-1;
     var sd=d.schedule_days!==undefined?d.schedule_days:0;
-    var info=document.getElementById('sInfo');
-    if(sm>=0&&em>=0&&sd>0){info.textContent='Activ: '+d2t(sd)+' | '+m2t(sm)+' - '+m2t(em);info.style.color='#4a4';}
-    else{info.textContent='Niciun program setat';info.style.color='#5b9aff';}
+    var inf=document.getElementById('sInfo');
+    if(sm>=0&&em>=0&&sd>0){inf.textContent=d2t(sd)+' | '+m2t(sm)+' - '+m2t(em);inf.style.color='#8c3';}
+    else{inf.textContent='Niciun program';inf.style.color='#666';}
 
     document.getElementById('evM').textContent=d.last_event||'--';
     if(d.timestamp){var a=Math.max(0,Math.floor(Date.now()/1000)-d.timestamp);var mm=Math.floor(a/60),ss=a%60;
@@ -315,19 +533,15 @@ function listenSensors(){
   });
 }
 
-function setSched(){
-  if(!db)return;var sM=t2m(document.getElementById('schS').value),eM=t2m(document.getElementById('schE').value);
-  var bits=0;var cbs=document.querySelectorAll('#dayChecks input');
-  for(var i=0;i<cbs.length;i++){if(cbs[i].checked)bits|=(1<<parseInt(cbs[i].value));}
-  if(sM<0||eM<0||bits===0){alert('Selecteaza cel putin o zi si completeaza ambele ore!');return;}
-  db.ref('/garage/commands/schedule_start_min').set(sM);db.ref('/garage/commands/schedule_end_min').set(eM);db.ref('/garage/commands/schedule_days').set(bits);
-}
-function clearSched(){
-  if(!db)return;db.ref('/garage/commands/schedule_start_min').set(-1);db.ref('/garage/commands/schedule_end_min').set(-1);db.ref('/garage/commands/schedule_days').set(0);
+function setSch(){if(!db)return;var sM=t2m(document.getElementById('schS').value),eM=t2m(document.getElementById('schE').value);
+  var bi=0;document.querySelectorAll('#dayChecks input').forEach(function(x){if(x.checked)bi|=(1<<parseInt(x.value));});
+  if(sM<0||eM<0||bi===0){alert('Selecteaza zile + ore!');return;}
+  db.ref('/garage/commands/schedule_start_min').set(sM);db.ref('/garage/commands/schedule_end_min').set(eM);db.ref('/garage/commands/schedule_days').set(bi);}
+function clrSch(){if(!db)return;db.ref('/garage/commands/schedule_start_min').set(-1);db.ref('/garage/commands/schedule_end_min').set(-1);db.ref('/garage/commands/schedule_days').set(0);
   document.getElementById('schS').value='';document.getElementById('schE').value='';
-  var cbs=document.querySelectorAll('#dayChecks input');for(var i=0;i<cbs.length;i++)cbs[i].checked=false;
-}
+  document.querySelectorAll('#dayChecks input').forEach(function(x){x.checked=false;});}
 function sB(id,p,t,c){document.getElementById('g'+id).style.width=p+'%';document.getElementById('g'+id).style.background=c;document.getElementById('gv'+id).textContent=t;}
 </script>
 </body>
 </html>
+
